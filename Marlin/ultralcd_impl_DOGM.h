@@ -151,7 +151,7 @@
 // LCD selection
 #if ENABLED(REPRAPWORLD_GRAPHICAL_LCD)
   U8GLIB_ST7920_128X64_4X u8g(LCD_PINS_RS); // 2 stripes
-  //U8GLIB_ST7920_128X64 u8g(LCD_PINS_RS); // 8 stripes
+  // U8GLIB_ST7920_128X64 u8g(LCD_PINS_RS); // 8 stripes
 #elif ENABLED(U8GLIB_ST7920)
   //U8GLIB_ST7920_128X64_4X u8g(LCD_PINS_D4, LCD_PINS_ENABLE, LCD_PINS_RS); // Original u8glib device. 2 stripes
                                                                             // No 4 stripe device available from u8glib.
@@ -204,7 +204,6 @@
 
 uint16_t lcd_contrast;
 static char currentfont = 0;
-static bool show_bootscreen = true;
 
 // The current graphical page being rendered
 u8g_page_t &page = ((u8g_pb_t *)((u8g.getU8g())->dev->dev_mem))->p;
@@ -265,81 +264,20 @@ void lcd_printPGM_utf(const char *str, uint8_t n=LCD_WIDTH) {
   #if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
 
     void lcd_custom_bootscreen() {
-  
-      pinMode(BTN_ENC,INPUT);
-      pinMode(BTN_EN1,INPUT);
-      pinMode(BTN_EN2,INPUT);
-      WRITE(BTN_EN1,HIGH);
-      WRITE(BTN_EN2,HIGH);
-      WRITE(BTN_ENC,HIGH);
-      
-      if (show_bootscreen) {  
       u8g.firstPage();
-        do {
-          u8g.drawBitmapP(
-            (128 - (CUSTOM_BOOTSCREEN1_BMPWIDTH))  /2,
-            ( 64 - (CUSTOM_BOOTSCREEN1_BMPHEIGHT)) /2,
-            CEILING(CUSTOM_BOOTSCREEN1_BMPWIDTH, 8), CUSTOM_BOOTSCREEN1_BMPHEIGHT, custom_start_bmp1);
-        } while (u8g.nextPage());
-        for (int i=0; i <= 10; i++){
-          if((READ(BTN_ENC)==0) || (READ(BTN_EN1)==0) || (READ(BTN_EN2)==0))
-          {
-            show_bootscreen = false;
-            return;
-          }
-          safe_delay(CUSTOM_BOOTSCREEN1_TIMEOUT/10);
-        }    
-    u8g.firstPage();
-        do {
-          u8g.drawBitmapP(
-            (128 - (CUSTOM_BOOTSCREEN2_BMPWIDTH))  /2,
-            ( 64 - (CUSTOM_BOOTSCREEN2_BMPHEIGHT)) /2,
-            CEILING(CUSTOM_BOOTSCREEN2_BMPWIDTH, 8), CUSTOM_BOOTSCREEN2_BMPHEIGHT, custom_start_bmp2);
-        } while (u8g.nextPage());
-        for (int i=0; i <= 10; i++){
-          if((READ(BTN_ENC)==0) || (READ(BTN_EN1)==0) || (READ(BTN_EN2)==0))
-          {
-            show_bootscreen = false;
-            return;
-          }
-          safe_delay(CUSTOM_BOOTSCREEN2_TIMEOUT/10);
-        } 
-    u8g.firstPage();
-        do {
-          u8g.drawBitmapP(
-            (128 - (CUSTOM_BOOTSCREEN3_BMPWIDTH))  /2,
-            ( 64 - (CUSTOM_BOOTSCREEN3_BMPHEIGHT)) /2,
-            CEILING(CUSTOM_BOOTSCREEN3_BMPWIDTH, 8), CUSTOM_BOOTSCREEN3_BMPHEIGHT, custom_start_bmp3);
-        } while (u8g.nextPage());
-        for (int i=0; i <= 10; i++){
-          if((READ(BTN_ENC)==0) || (READ(BTN_EN1)==0) || (READ(BTN_EN2)==0))
-          {
-            show_bootscreen = false;
-            return;
-          }
-          safe_delay(CUSTOM_BOOTSCREEN3_TIMEOUT/10);
-        }
-     u8g.firstPage();
-        do {
-          u8g.drawBitmapP(
-            (128 - (CUSTOM_BOOTSCREEN4_BMPWIDTH))  /2,
-            ( 64 - (CUSTOM_BOOTSCREEN4_BMPHEIGHT)) /2,
-            CEILING(CUSTOM_BOOTSCREEN4_BMPWIDTH, 8), CUSTOM_BOOTSCREEN4_BMPHEIGHT, custom_start_bmp4);
-        } while (u8g.nextPage());
-        for (int i=0; i <= 10; i++){
-          if((READ(BTN_ENC)==0) || (READ(BTN_EN1)==0) || (READ(BTN_EN2)==0))
-          {
-            show_bootscreen = false;
-            return;
-          }
-          safe_delay(CUSTOM_BOOTSCREEN3_TIMEOUT/10);
-        }
-      }
+      do {
+        u8g.drawBitmapP(
+          (128 - (CUSTOM_BOOTSCREEN_BMPWIDTH))  /2,
+          ( 64 - (CUSTOM_BOOTSCREEN_BMPHEIGHT)) /2,
+          CEILING(CUSTOM_BOOTSCREEN_BMPWIDTH, 8), CUSTOM_BOOTSCREEN_BMPHEIGHT, custom_start_bmp);
+      } while (u8g.nextPage());
     }
-  
+
   #endif // SHOW_CUSTOM_BOOTSCREEN
 
   void lcd_bootscreen() {
+
+    static bool show_bootscreen = true;
 
     if (show_bootscreen) {
       show_bootscreen = false;
@@ -365,14 +303,6 @@ void lcd_printPGM_utf(const char *str, uint8_t n=LCD_WIDTH) {
           u8g.drawStr(txt2X, u8g.getHeight() - (DOG_CHAR_HEIGHT) * 1 / 2, STRING_SPLASH_LINE2);
         #endif
       } while (u8g.nextPage());
-      for (int i=0; i <= 10; i++){
-        if((READ(BTN_ENC)==0) || (READ(BTN_EN1)==0) || (READ(BTN_EN2)==0))
-          {
-            show_bootscreen = false;
-            return;
-          }
-        safe_delay(BOOTSCREEN_TIMEOUT/10);
-      }
     }
   }
 
@@ -408,7 +338,6 @@ static void lcd_implementation_init() {
   #if ENABLED(SHOW_BOOTSCREEN)
     #if ENABLED(SHOW_CUSTOM_BOOTSCREEN)
       lcd_custom_bootscreen();
-      lcd_bootscreen();
     #else
       lcd_bootscreen();
     #endif
@@ -510,10 +439,10 @@ inline void lcd_implementation_status_message(const bool blink) {
           lcd_print_utf(stat);                                  // The string leaves space
           chars -= slen - status_scroll_pos;                    // Amount of space left
         }
-        u8g.print(' ');                                         // Always at 1+ spaces left, draw a space
+        u8g.print('.');                                         // Always at 1+ spaces left, draw a dot
         if (--chars) {
-          if (status_scroll_pos < slen + 1)                     // Draw a second space if there's space
-            --chars, u8g.print(' ');
+          if (status_scroll_pos < slen + 1)                     // Draw a second dot if there's space
+            --chars, u8g.print('.');
           if (chars) lcd_print_utf(lcd_status_message, chars);  // Print a second copy of the message
         }
       }
@@ -529,7 +458,7 @@ inline void lcd_implementation_status_message(const bool blink) {
   #endif
 }
 
-#define DOGM_SD_PERCENT
+//#define DOGM_SD_PERCENT
 
 static void lcd_implementation_status_screen() {
 
