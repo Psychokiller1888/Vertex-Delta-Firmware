@@ -24,103 +24,39 @@
  * English
  *
  * LCD Menu Messages
- * See also https://github.com/MarlinFirmware/Marlin/wiki/LCD-Language
+ * See also http://marlinfw.org/docs/development/lcd_language.html
  *
  */
 #ifndef LANGUAGE_EN_H
 #define LANGUAGE_EN_H
 
-// Start Splashscreen
-#ifndef MSG_SPLASH_NAME
-  #define MSG_SPLASH_NAME                    _UxGT("VERTEX DELTA")
+#define en 1234
+#if LCD_LANGUAGE == en
+  #define NOT_EXTENDED_ISO10646_1_5X7
 #endif
-#ifndef MSG_SPLASH_FIRMWARE
-  #define MSG_SPLASH_FIRMWARE                _UxGT("V1.0")
-#endif
-#ifndef MSG_SPLASH_WEBSITE1
-  #define MSG_SPLASH_WEBSITE1                _UxGT("vertex3dprinter.eu")
-#endif
-#ifndef MSG_SPLASH_WEBSITE2
-  #define MSG_SPLASH_WEBSITE2                _UxGT("vellemanprojects.eu")
-#endif
-#ifndef MSG_SPLASH_WEBSITE3
-  #define MSG_SPLASH_WEBSITE3                _UxGT("velleman.eu")
-#endif
-#ifndef MSG_BOOT_LINE2
-  #define MSG_BOOT_LINE2                     _UxGT("VERTEX DELTA")
-#endif
-// End Splashscreen
+#undef en
 
-// Start added Vertex Delta menu items
-#ifndef MSG_FIRMWARE
-  #define MSG_FIRMWARE                        _UxGT("Firmware version")
+#ifndef CHARSIZE
+  #define CHARSIZE 1
 #endif
-#ifndef MSG_LED_MENU
-	#define MSG_LED_MENU 					  _UxGT("Set LED color")
-#endif
-#ifndef MSG_LOAD_FILAMENT
-	#define MSG_LOAD_FILAMENT 				  _UxGT("Load filament")
-#endif
-#ifndef MSG_UNLOAD_FILAMENT
-	#define MSG_UNLOAD_FILAMENT 			  _UxGT("Unload filament")
-#endif
-#ifndef MSG_LOAD_ABS
-  #define MSG_LOAD_ABS         _UxGT("Load ABS filament")
-#endif
-#ifndef MSG_LOAD_PLA
-  #define MSG_LOAD_PLA         _UxGT("Load PLA filament")
-#endif
-#ifndef MSG_LOAD_TPU
-  #define MSG_LOAD_TPU         _UxGT("Load TPU filament")
-#endif
-#ifndef MSG_LOAD_PET
-  #define MSG_LOAD_PET         _UxGT("Load PET filament")
-#endif
-#ifndef MSG_UNLOAD_ABS
-  #define MSG_UNLOAD_ABS         _UxGT("Unload ABS filament")
-#endif
-#ifndef MSG_UNLOAD_PLA
-  #define MSG_UNLOAD_PLA         _UxGT("Unload PLA filament")
-#endif
-#ifndef MSG_UNLOAD_TPU
-  #define MSG_UNLOAD_TPU         _UxGT("Unload TPU filament")
-#endif
-#ifndef MSG_UNLOAD_PET
-  #define MSG_UNLOAD_PET         _UxGT("Unload PET filament")
-#endif
-#ifndef MSG_LOAD_TEXT0
-  #define MSG_LOAD_TEXT0         _UxGT("Insert filament until")
-#endif
-#ifndef MSG_LOAD_TEXT1
-  #define MSG_LOAD_TEXT1         _UxGT("3cm is visible in")
-#endif
-#ifndef MSG_LOAD_TEXT2
-  #define MSG_LOAD_TEXT2         _UxGT("the tube. Press the")
-#endif
-#ifndef MSG_LOAD_TEXT3
-  #define MSG_LOAD_TEXT3         _UxGT("button when ready.")
-#endif        
-#ifndef MSG_LOAD_TITLE
-  #define MSG_LOAD_TITLE         _UxGT("Loading Filament")
-#endif 
-#ifndef MSG_VERTEX_PRINTING
-  #define MSG_VERTEX_PRINTING         _UxGT("Vertex is printing")
-#endif 
-// End added Vertex Delta menu items 														 
+
 #ifndef WELCOME_MSG
-  #define WELCOME_MSG                         MACHINE_NAME _UxGT(" is ready")
+  #define WELCOME_MSG                         MACHINE_NAME _UxGT(" Ready.")
 #endif
 #ifndef MSG_BACK
   #define MSG_BACK                            _UxGT("Back")
 #endif
 #ifndef MSG_SD_INSERTED
-  #define MSG_SD_INSERTED                     _UxGT("SD Card inserted")
+  #define MSG_SD_INSERTED                     _UxGT("Card inserted")
 #endif
 #ifndef MSG_SD_REMOVED
-  #define MSG_SD_REMOVED                      _UxGT("SD Card removed")
+  #define MSG_SD_REMOVED                      _UxGT("Card removed")
 #endif
 #ifndef MSG_LCD_ENDSTOPS
   #define MSG_LCD_ENDSTOPS                    _UxGT("Endstops") // Max length 8 characters
+#endif
+#ifndef MSG_LCD_SOFT_ENDSTOPS
+  #define MSG_LCD_SOFT_ENDSTOPS               _UxGT("Soft Endstops")
 #endif
 #ifndef MSG_MAIN
   #define MSG_MAIN                            _UxGT("Main")
@@ -148,6 +84,9 @@
 #endif
 #ifndef MSG_AUTO_HOME_Z
   #define MSG_AUTO_HOME_Z                     _UxGT("Home Z")
+#endif
+#ifndef MSG_TMC_Z_CALIBRATION
+  #define MSG_TMC_Z_CALIBRATION               _UxGT("Calibrate Z")
 #endif
 #ifndef MSG_LEVEL_BED_HOMING
   #define MSG_LEVEL_BED_HOMING                _UxGT("Homing XYZ")
@@ -233,13 +172,18 @@
 #ifndef MSG_LEVEL_BED
   #define MSG_LEVEL_BED                       _UxGT("Level bed")
 #endif
+#ifndef MSG_LEVEL_CORNERS
+  #define MSG_LEVEL_CORNERS                   _UxGT("Level corners")
+#endif
+#ifndef MSG_NEXT_CORNER
+  #define MSG_NEXT_CORNER                     _UxGT("Next corner")
+#endif
 #ifndef MSG_EDITING_STOPPED
   #define MSG_EDITING_STOPPED                 _UxGT("Mesh Editing Stopped")
 #endif
 #ifndef MSG_USER_MENU
   #define MSG_USER_MENU                       _UxGT("Custom Commands")
 #endif
-
 #ifndef MSG_UBL_DOING_G29
   #define MSG_UBL_DOING_G29                   _UxGT("Doing G29")
 #endif
@@ -284,6 +228,9 @@
 #endif
 #ifndef MSG_UBL_CUSTOM_HOTEND_TEMP
   #define MSG_UBL_CUSTOM_HOTEND_TEMP          MSG_UBL_SET_HOTEND_TEMP
+#endif
+#ifndef MSG_UBL_MESH_EDIT
+  #define MSG_UBL_MESH_EDIT                   _UxGT("Mesh Edit")
 #endif
 #ifndef MSG_UBL_EDIT_CUSTOM_MESH
   #define MSG_UBL_EDIT_CUSTOM_MESH            _UxGT("Edit Custom Mesh")
@@ -402,6 +349,15 @@
 #ifndef MSG_UBL_SAVE_MESH
   #define MSG_UBL_SAVE_MESH                   _UxGT("Save Bed Mesh")
 #endif
+#ifndef MSG_MESH_LOADED
+  #define MSG_MESH_LOADED                     _UxGT("Mesh %i loaded")
+#endif
+#ifndef MSG_MESH_SAVED
+  #define MSG_MESH_SAVED                      _UxGT("Mesh %i saved")
+#endif
+#ifndef MSG_NO_STORAGE
+  #define MSG_NO_STORAGE                      _UxGT("No storage")
+#endif
 #ifndef MSG_UBL_SAVE_ERROR
   #define MSG_UBL_SAVE_ERROR                  _UxGT("Err: UBL Save")
 #endif
@@ -413,6 +369,61 @@
 #endif
 #ifndef MSG_UBL_STEP_BY_STEP_MENU
   #define MSG_UBL_STEP_BY_STEP_MENU           _UxGT("Step-By-Step UBL")
+#endif
+
+#ifndef MSG_LED_CONTROL
+  #define MSG_LED_CONTROL                     _UxGT("LED Control")
+#endif
+#ifndef MSG_LEDS
+  #define MSG_LEDS                            _UxGT("Lights")
+#endif
+#ifndef MSG_LED_PRESETS
+  #define MSG_LED_PRESETS                     _UxGT("Light Presets")
+#endif
+#ifndef MSG_SET_LEDS_RED
+  #define MSG_SET_LEDS_RED                    _UxGT("Red")
+#endif
+#ifndef MSG_SET_LEDS_ORANGE
+  #define MSG_SET_LEDS_ORANGE                 _UxGT("Orange")
+#endif
+#ifndef MSG_SET_LEDS_YELLOW
+  #define MSG_SET_LEDS_YELLOW                 _UxGT("Yellow")
+#endif
+#ifndef MSG_SET_LEDS_GREEN
+  #define MSG_SET_LEDS_GREEN                  _UxGT("Green")
+#endif
+#ifndef MSG_SET_LEDS_BLUE
+  #define MSG_SET_LEDS_BLUE                   _UxGT("Blue")
+#endif
+#ifndef MSG_SET_LEDS_INDIGO
+  #define MSG_SET_LEDS_INDIGO                 _UxGT("Indigo")
+#endif
+#ifndef MSG_SET_LEDS_VIOLET
+  #define MSG_SET_LEDS_VIOLET                 _UxGT("Violet")
+#endif
+#ifndef MSG_SET_LEDS_WHITE
+  #define MSG_SET_LEDS_WHITE                  _UxGT("White")
+#endif
+#ifndef MSG_SET_LEDS_DEFAULT
+  #define MSG_SET_LEDS_DEFAULT                _UxGT("Default")
+#endif
+#ifndef MSG_CUSTOM_LEDS
+  #define MSG_CUSTOM_LEDS                     _UxGT("Custom Lights")
+#endif
+#ifndef MSG_INTENSITY_R
+  #define MSG_INTENSITY_R                     _UxGT("Red Intensity")
+#endif
+#ifndef MSG_INTENSITY_G
+  #define MSG_INTENSITY_G                     _UxGT("Green Intensity")
+#endif
+#ifndef MSG_INTENSITY_B
+  #define MSG_INTENSITY_B                     _UxGT("Blue Intensity")
+#endif
+#ifndef MSG_INTENSITY_W
+  #define MSG_INTENSITY_W                     _UxGT("White Intensity")
+#endif
+#ifndef MSG_LED_BRIGHTNESS
+  #define MSG_LED_BRIGHTNESS                  _UxGT("Brightness")
 #endif
 
 #ifndef MSG_MOVING
@@ -457,11 +468,14 @@
 #ifndef MSG_FAN_SPEED
   #define MSG_FAN_SPEED                       _UxGT("Fan speed")
 #endif
+#ifndef MSG_EXTRA_FAN_SPEED
+  #define MSG_EXTRA_FAN_SPEED                 _UxGT("Extra fan speed")
+#endif
 #ifndef MSG_FLOW
   #define MSG_FLOW                            _UxGT("Flow")
 #endif
 #ifndef MSG_CONTROL
-  #define MSG_CONTROL                         _UxGT("Settings")
+  #define MSG_CONTROL                         _UxGT("Control")
 #endif
 #ifndef MSG_MIN
   #define MSG_MIN                             _UxGT(" ") LCD_STR_THERMOMETER _UxGT(" Min")
@@ -502,17 +516,32 @@
 #ifndef MSG_JERK
   #define MSG_JERK                            _UxGT("Jerk")
 #endif
-#ifndef MSG_VX_JERK
-  #define MSG_VX_JERK                         _UxGT("Vx-jerk")
-#endif
-#ifndef MSG_VY_JERK
-  #define MSG_VY_JERK                         _UxGT("Vy-jerk")
-#endif
-#ifndef MSG_VZ_JERK
-  #define MSG_VZ_JERK                         _UxGT("Vz-jerk")
+#if IS_KINEMATIC
+  #ifndef MSG_VA_JERK
+    #define MSG_VA_JERK                       _UxGT("Va-jerk")
+  #endif
+  #ifndef MSG_VB_JERK
+    #define MSG_VB_JERK                       _UxGT("Vb-jerk")
+  #endif
+  #ifndef MSG_VC_JERK
+    #define MSG_VC_JERK                       _UxGT("Vc-jerk")
+  #endif
+#else
+  #ifndef MSG_VA_JERK
+    #define MSG_VA_JERK                       _UxGT("Vx-jerk")
+  #endif
+  #ifndef MSG_VB_JERK
+    #define MSG_VB_JERK                       _UxGT("Vy-jerk")
+  #endif
+  #ifndef MSG_VC_JERK
+    #define MSG_VC_JERK                       _UxGT("Vz-jerk")
+  #endif
 #endif
 #ifndef MSG_VE_JERK
   #define MSG_VE_JERK                         _UxGT("Ve-jerk")
+#endif
+#ifndef MSG_JUNCTION_DEVIATION
+  #define MSG_JUNCTION_DEVIATION              _UxGT("Junction Dev")
 #endif
 #ifndef MSG_VELOCITY
   #define MSG_VELOCITY                        _UxGT("Velocity")
@@ -541,14 +570,26 @@
 #ifndef MSG_STEPS_PER_MM
   #define MSG_STEPS_PER_MM                    _UxGT("Steps/mm")
 #endif
-#ifndef MSG_XSTEPS
-  #define MSG_XSTEPS                          _UxGT("Xsteps/mm")
-#endif
-#ifndef MSG_YSTEPS
-  #define MSG_YSTEPS                          _UxGT("Ysteps/mm")
-#endif
-#ifndef MSG_ZSTEPS
-  #define MSG_ZSTEPS                          _UxGT("Zsteps/mm")
+#if IS_KINEMATIC
+  #ifndef MSG_ASTEPS
+    #define MSG_ASTEPS                        _UxGT("Asteps/mm")
+  #endif
+  #ifndef MSG_BSTEPS
+    #define MSG_BSTEPS                        _UxGT("Bsteps/mm")
+  #endif
+  #ifndef MSG_CSTEPS
+    #define MSG_CSTEPS                        _UxGT("Csteps/mm")
+  #endif
+#else
+  #ifndef MSG_ASTEPS
+    #define MSG_ASTEPS                        _UxGT("Xsteps/mm")
+  #endif
+  #ifndef MSG_BSTEPS
+    #define MSG_BSTEPS                        _UxGT("Ysteps/mm")
+  #endif
+  #ifndef MSG_CSTEPS
+    #define MSG_CSTEPS                        _UxGT("Zsteps/mm")
+  #endif
 #endif
 #ifndef MSG_ESTEPS
   #define MSG_ESTEPS                          _UxGT("Esteps/mm")
@@ -583,6 +624,12 @@
 #ifndef MSG_FILAMENT_DIAM
   #define MSG_FILAMENT_DIAM                   _UxGT("Fil. Dia.")
 #endif
+#ifndef MSG_FILAMENT_UNLOAD
+  #define MSG_FILAMENT_UNLOAD                 _UxGT("Unload mm")
+#endif
+#ifndef MSG_FILAMENT_LOAD
+  #define MSG_FILAMENT_LOAD                   _UxGT("Load mm")
+#endif
 #ifndef MSG_ADVANCE_K
   #define MSG_ADVANCE_K                       _UxGT("Advance K")
 #endif
@@ -608,10 +655,10 @@
   #define MSG_WATCH                           _UxGT("Info screen")
 #endif
 #ifndef MSG_PREPARE
-  #define MSG_PREPARE                         _UxGT("Control printer")
+  #define MSG_PREPARE                         _UxGT("Prepare")
 #endif
 #ifndef MSG_TUNE
-  #define MSG_TUNE                            _UxGT("Tune print job")
+  #define MSG_TUNE                            _UxGT("Tune")
 #endif
 #ifndef MSG_PAUSE_PRINT
   #define MSG_PAUSE_PRINT                     _UxGT("Pause print")
@@ -622,11 +669,14 @@
 #ifndef MSG_STOP_PRINT
   #define MSG_STOP_PRINT                      _UxGT("Stop print")
 #endif
+#ifndef MSG_POWER_LOSS_RECOVERY
+  #define MSG_POWER_LOSS_RECOVERY             _UxGT("Power-Loss Recovery")
+#endif
 #ifndef MSG_CARD_MENU
-  #define MSG_CARD_MENU                       _UxGT("Print from SD card")
+  #define MSG_CARD_MENU                       _UxGT("Print from SD")
 #endif
 #ifndef MSG_NO_CARD
-  #define MSG_NO_CARD                         _UxGT("Insert SD card")
+  #define MSG_NO_CARD                         _UxGT("No SD card")
 #endif
 #ifndef MSG_DWELL
   #define MSG_DWELL                           _UxGT("Sleep...")
@@ -635,10 +685,10 @@
   #define MSG_USERWAIT                        _UxGT("Click to resume...")
 #endif
 #ifndef MSG_PRINT_PAUSED
-  #define MSG_PRINT_PAUSED                    _UxGT("Print is paused")
+  #define MSG_PRINT_PAUSED                    _UxGT("Print paused")
 #endif
-#ifndef MSG_RESUMING
-  #define MSG_RESUMING                        _UxGT("Resuming print")
+#ifndef MSG_PRINTING
+  #define MSG_PRINTING                        _UxGT("Printing...")
 #endif
 #ifndef MSG_PRINT_ABORTED
   #define MSG_PRINT_ABORTED                   _UxGT("Print aborted")
@@ -647,10 +697,10 @@
   #define MSG_NO_MOVE                         _UxGT("No move.")
 #endif
 #ifndef MSG_KILLED
-  #define MSG_KILLED                          _UxGT("   Fault detected!")
+  #define MSG_KILLED                          _UxGT("KILLED. ")
 #endif
 #ifndef MSG_STOPPED
-  #define MSG_STOPPED                         _UxGT("Stopped!")
+  #define MSG_STOPPED                         _UxGT("STOPPED. ")
 #endif
 #ifndef MSG_CONTROL_RETRACT
   #define MSG_CONTROL_RETRACT                 _UxGT("Retract mm")
@@ -671,13 +721,25 @@
   #define MSG_CONTROL_RETRACT_RECOVER_SWAP    _UxGT("S UnRet mm")
 #endif
 #ifndef MSG_CONTROL_RETRACT_RECOVERF
-  #define MSG_CONTROL_RETRACT_RECOVERF        _UxGT("UnRet  V")
+  #define MSG_CONTROL_RETRACT_RECOVERF        _UxGT("UnRet V")
+#endif
+#ifndef MSG_CONTROL_RETRACT_RECOVER_SWAPF
+  #define MSG_CONTROL_RETRACT_RECOVER_SWAPF   _UxGT("S UnRet V")
 #endif
 #ifndef MSG_AUTORETRACT
   #define MSG_AUTORETRACT                     _UxGT("AutoRetr.")
 #endif
 #ifndef MSG_FILAMENTCHANGE
   #define MSG_FILAMENTCHANGE                  _UxGT("Change filament")
+#endif
+#ifndef MSG_FILAMENTLOAD
+  #define MSG_FILAMENTLOAD                    _UxGT("Load filament")
+#endif
+#ifndef MSG_FILAMENTUNLOAD
+  #define MSG_FILAMENTUNLOAD                  _UxGT("Unload filament")
+#endif
+#ifndef MSG_FILAMENTUNLOAD_ALL
+  #define MSG_FILAMENTUNLOAD_ALL              _UxGT("Unload All")
 #endif
 #ifndef MSG_INIT_SDCARD
   #define MSG_INIT_SDCARD                     _UxGT("Init. SD card")
@@ -686,7 +748,10 @@
   #define MSG_CNG_SDCARD                      _UxGT("Change SD card")
 #endif
 #ifndef MSG_ZPROBE_OUT
-  #define MSG_ZPROBE_OUT                      _UxGT("Z probe out. bed")
+  #define MSG_ZPROBE_OUT                      _UxGT("Z Probe past bed")
+#endif
+#ifndef MSG_SKEW_FACTOR
+  #define MSG_SKEW_FACTOR                     _UxGT("Skew Factor")
 #endif
 #ifndef MSG_BLTOUCH
   #define MSG_BLTOUCH                         _UxGT("BLTouch")
@@ -710,7 +775,7 @@
   #define MSG_FIRST                           _UxGT("first")
 #endif
 #ifndef MSG_ZPROBE_ZOFFSET
-  #define MSG_ZPROBE_ZOFFSET                  _UxGT("Z Offset")
+  #define MSG_ZPROBE_ZOFFSET                  _UxGT("Probe Z Offset")
 #endif
 #ifndef MSG_BABYSTEP_X
   #define MSG_BABYSTEP_X                      _UxGT("Babystep X")
@@ -722,37 +787,43 @@
   #define MSG_BABYSTEP_Z                      _UxGT("Babystep Z")
 #endif
 #ifndef MSG_ENDSTOP_ABORT
-  #define MSG_ENDSTOP_ABORT                   _UxGT("    Endstop abort!")
+  #define MSG_ENDSTOP_ABORT                   _UxGT("Endstop abort")
 #endif
 #ifndef MSG_HEATING_FAILED_LCD
-  #define MSG_HEATING_FAILED_LCD              _UxGT("   Heating failed!")
+  #define MSG_HEATING_FAILED_LCD              _UxGT("Heating failed")
+#endif
+#ifndef MSG_HEATING_FAILED_LCD_BED
+  #define MSG_HEATING_FAILED_LCD_BED          _UxGT("Bed heating failed")
 #endif
 #ifndef MSG_ERR_REDUNDANT_TEMP
   #define MSG_ERR_REDUNDANT_TEMP              _UxGT("Err: REDUNDANT TEMP")
 #endif
 #ifndef MSG_THERMAL_RUNAWAY
-  #define MSG_THERMAL_RUNAWAY                 _UxGT("   Thermal runaway!")
+  #define MSG_THERMAL_RUNAWAY                 _UxGT("THERMAL RUNAWAY")
+#endif
+#ifndef MSG_THERMAL_RUNAWAY_BED
+  #define MSG_THERMAL_RUNAWAY_BED             _UxGT("BED THERMAL RUNAWAY")
 #endif
 #ifndef MSG_ERR_MAXTEMP
-  #define MSG_ERR_MAXTEMP                     _UxGT("    Err: MAXTEMP!")
+  #define MSG_ERR_MAXTEMP                     _UxGT("Err: MAXTEMP")
 #endif
 #ifndef MSG_ERR_MINTEMP
-  #define MSG_ERR_MINTEMP                     _UxGT("    Err: MINTEMP!")
+  #define MSG_ERR_MINTEMP                     _UxGT("Err: MINTEMP")
 #endif
 #ifndef MSG_ERR_MAXTEMP_BED
-  #define MSG_ERR_MAXTEMP_BED                 _UxGT("  Err: MAXTEMP BED!")
+  #define MSG_ERR_MAXTEMP_BED                 _UxGT("Err: MAXTEMP BED")
 #endif
 #ifndef MSG_ERR_MINTEMP_BED
-  #define MSG_ERR_MINTEMP_BED                 _UxGT("  Err: MINTEMP BED!")
+  #define MSG_ERR_MINTEMP_BED                 _UxGT("Err: MINTEMP BED")
 #endif
 #ifndef MSG_ERR_Z_HOMING
-  #define MSG_ERR_Z_HOMING                    _UxGT("   G28 Z Forbidden!")
+  #define MSG_ERR_Z_HOMING                    MSG_HOME _UxGT(" ") MSG_X MSG_Y _UxGT(" ") MSG_FIRST
 #endif
 #ifndef MSG_HALTED
-  #define MSG_HALTED                          _UxGT("  Vertex has halted!")
+  #define MSG_HALTED                          _UxGT("PRINTER HALTED")
 #endif
 #ifndef MSG_PLEASE_RESET
-  #define MSG_PLEASE_RESET                    _UxGT("Please power-cycle...")
+  #define MSG_PLEASE_RESET                    _UxGT("Please reset")
 #endif
 #ifndef MSG_SHORT_DAY
   #define MSG_SHORT_DAY                       _UxGT("d") // One character only
@@ -766,17 +837,17 @@
 #ifndef MSG_HEATING
   #define MSG_HEATING                         _UxGT("Heating...")
 #endif
-#ifndef MSG_HEATING_COMPLETE
-  #define MSG_HEATING_COMPLETE                _UxGT("Heating done.")
+#ifndef MSG_COOLING
+  #define MSG_COOLING                         _UxGT("Cooling...")
 #endif
 #ifndef MSG_BED_HEATING
-  #define MSG_BED_HEATING                     _UxGT("Bed Heating.")
+  #define MSG_BED_HEATING                     _UxGT("Bed heating...")
 #endif
-#ifndef MSG_BED_DONE
-  #define MSG_BED_DONE                        _UxGT("Bed done.")
+#ifndef MSG_BED_COOLING
+  #define MSG_BED_COOLING                     _UxGT("Bed cooling...")
 #endif
 #ifndef MSG_DELTA_CALIBRATE
-  #define MSG_DELTA_CALIBRATE                 _UxGT("Vertex Calibration")
+  #define MSG_DELTA_CALIBRATE                 _UxGT("Delta Calibration")
 #endif
 #ifndef MSG_DELTA_CALIBRATE_X
   #define MSG_DELTA_CALIBRATE_X               _UxGT("Calibrate X")
@@ -790,14 +861,29 @@
 #ifndef MSG_DELTA_CALIBRATE_CENTER
   #define MSG_DELTA_CALIBRATE_CENTER          _UxGT("Calibrate Center")
 #endif
+#ifndef MSG_DELTA_SETTINGS
+  #define MSG_DELTA_SETTINGS                  _UxGT("Delta Settings")
+#endif
 #ifndef MSG_DELTA_AUTO_CALIBRATE
   #define MSG_DELTA_AUTO_CALIBRATE            _UxGT("Auto Calibration")
 #endif
 #ifndef MSG_DELTA_HEIGHT_CALIBRATE
-  #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Calibrate Height")
+  #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Set Delta Height")
+#endif
+#ifndef MSG_DELTA_Z_OFFSET_CALIBRATE
+  #define MSG_DELTA_Z_OFFSET_CALIBRATE        _UxGT("Probe Z-offset")
+#endif
+#ifndef MSG_DELTA_DIAG_ROD
+  #define MSG_DELTA_DIAG_ROD                  _UxGT("Diag Rod")
+#endif
+#ifndef MSG_DELTA_HEIGHT
+  #define MSG_DELTA_HEIGHT                    _UxGT("Height")
+#endif
+#ifndef MSG_DELTA_RADIUS
+  #define MSG_DELTA_RADIUS                    _UxGT("Radius")
 #endif
 #ifndef MSG_INFO_MENU
-  #define MSG_INFO_MENU                       _UxGT("About Vertex Delta")
+  #define MSG_INFO_MENU                       _UxGT("About Printer")
 #endif
 #ifndef MSG_INFO_PRINTER_MENU
   #define MSG_INFO_PRINTER_MENU               _UxGT("Printer Info")
@@ -818,7 +904,7 @@
   #define MSG_MESH_LEVELING                   _UxGT("Mesh Leveling")
 #endif
 #ifndef MSG_INFO_STATS_MENU
-  #define MSG_INFO_STATS_MENU                 _UxGT("Printer Statistics")
+  #define MSG_INFO_STATS_MENU                 _UxGT("Printer Stats")
 #endif
 #ifndef MSG_INFO_BOARD_MENU
   #define MSG_INFO_BOARD_MENU                 _UxGT("Board Info")
@@ -836,10 +922,10 @@
   #define MSG_INFO_PROTOCOL                   _UxGT("Protocol")
 #endif
 #ifndef MSG_CASE_LIGHT
-  #define MSG_CASE_LIGHT                      _UxGT("Nozzle lights")
+  #define MSG_CASE_LIGHT                      _UxGT("Case light")
 #endif
 #ifndef MSG_CASE_LIGHT_BRIGHTNESS
-  #define MSG_CASE_LIGHT_BRIGHTNESS           _UxGT("Brightness")
+  #define MSG_CASE_LIGHT_BRIGHTNESS           _UxGT("Light BRIGHTNESS")
 #endif
 #if LCD_WIDTH >= 20
   #ifndef MSG_INFO_PRINT_COUNT
@@ -874,7 +960,6 @@
     #define MSG_INFO_PRINT_FILAMENT           _UxGT("Extruded")
   #endif
 #endif
-
 #ifndef MSG_INFO_MIN_TEMP
   #define MSG_INFO_MIN_TEMP                   _UxGT("Min Temp")
 #endif
@@ -882,7 +967,7 @@
   #define MSG_INFO_MAX_TEMP                   _UxGT("Max Temp")
 #endif
 #ifndef MSG_INFO_PSU
-  #define MSG_INFO_PSU                        _UxGT("Power Supply")
+  #define MSG_INFO_PSU                        _UxGT("PSU")
 #endif
 #ifndef MSG_DRIVE_STRENGTH
   #define MSG_DRIVE_STRENGTH                  _UxGT("Drive Strength")
@@ -893,23 +978,35 @@
 #ifndef MSG_DAC_EEPROM_WRITE
   #define MSG_DAC_EEPROM_WRITE                _UxGT("DAC EEPROM Write")
 #endif
-#ifndef MSG_FILAMENT_CHANGE_HEADER
-  #define MSG_FILAMENT_CHANGE_HEADER          _UxGT("PAUSE/CHANGE")
+#ifndef MSG_FILAMENT_CHANGE_HEADER_PAUSE
+  #define MSG_FILAMENT_CHANGE_HEADER_PAUSE    _UxGT("PRINT PAUSED")
+#endif
+#ifndef MSG_FILAMENT_CHANGE_HEADER_LOAD
+  #define MSG_FILAMENT_CHANGE_HEADER_LOAD     _UxGT("LOAD FILAMENT")
+#endif
+#ifndef MSG_FILAMENT_CHANGE_HEADER_UNLOAD
+  #define MSG_FILAMENT_CHANGE_HEADER_UNLOAD   _UxGT("UNLOAD FILAMENT")
 #endif
 #ifndef MSG_FILAMENT_CHANGE_OPTION_HEADER
   #define MSG_FILAMENT_CHANGE_OPTION_HEADER   _UxGT("RESUME OPTIONS:")
 #endif
-#ifndef MSG_FILAMENT_CHANGE_OPTION_EXTRUDE
-  #define MSG_FILAMENT_CHANGE_OPTION_EXTRUDE  _UxGT("Extrude a bit more")
+#ifndef MSG_FILAMENT_CHANGE_OPTION_PURGE
+  #define MSG_FILAMENT_CHANGE_OPTION_PURGE    _UxGT("Purge more")
 #endif
 #ifndef MSG_FILAMENT_CHANGE_OPTION_RESUME
-  #define MSG_FILAMENT_CHANGE_OPTION_RESUME   _UxGT("Resume printing")
-#endif
-#ifndef MSG_FILAMENT_CHANGE_MINTEMP
-  #define MSG_FILAMENT_CHANGE_MINTEMP         _UxGT("Minimum Temp is ")
+  #define MSG_FILAMENT_CHANGE_OPTION_RESUME   _UxGT("Continue")
 #endif
 #ifndef MSG_FILAMENT_CHANGE_NOZZLE
   #define MSG_FILAMENT_CHANGE_NOZZLE          _UxGT("  Nozzle: ")
+#endif
+#ifndef MSG_ERR_HOMING_FAILED
+  #define MSG_ERR_HOMING_FAILED               _UxGT("Homing failed")
+#endif
+#ifndef MSG_ERR_PROBING_FAILED
+  #define MSG_ERR_PROBING_FAILED              _UxGT("Probing failed")
+#endif
+#ifndef MSG_M600_TOO_COLD
+  #define MSG_M600_TOO_COLD                   _UxGT("M600: Too cold")
 #endif
 
 //
@@ -918,16 +1015,16 @@
 //
 #if LCD_HEIGHT >= 4
   #ifndef MSG_FILAMENT_CHANGE_INIT_1
-    #define MSG_FILAMENT_CHANGE_INIT_1          _UxGT("Waiting for start")
+    #define MSG_FILAMENT_CHANGE_INIT_1          _UxGT("Wait for start")
     #define MSG_FILAMENT_CHANGE_INIT_2          _UxGT("of the filament")
     #define MSG_FILAMENT_CHANGE_INIT_3          _UxGT("change")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_UNLOAD_1
-    #define MSG_FILAMENT_CHANGE_UNLOAD_1        _UxGT("Wait for the")
-    #define MSG_FILAMENT_CHANGE_UNLOAD_2        _UxGT("filament to unload")
+    #define MSG_FILAMENT_CHANGE_UNLOAD_1        _UxGT("Wait for")
+    #define MSG_FILAMENT_CHANGE_UNLOAD_2        _UxGT("filament unload")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_INSERT_1
-    #define MSG_FILAMENT_CHANGE_INSERT_1        _UxGT("Insert new filament")
+    #define MSG_FILAMENT_CHANGE_INSERT_1        _UxGT("Insert filament")
     #define MSG_FILAMENT_CHANGE_INSERT_2        _UxGT("and press button")
     #define MSG_FILAMENT_CHANGE_INSERT_3        _UxGT("to continue...")
   #endif
@@ -936,20 +1033,20 @@
     #define MSG_FILAMENT_CHANGE_HEAT_2          _UxGT("heat nozzle.")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_HEATING_1
-    #define MSG_FILAMENT_CHANGE_HEATING_1       _UxGT("Heating the nozzle")
+    #define MSG_FILAMENT_CHANGE_HEATING_1       _UxGT("Heating nozzle")
     #define MSG_FILAMENT_CHANGE_HEATING_2       _UxGT("Please wait...")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_LOAD_1
-    #define MSG_FILAMENT_CHANGE_LOAD_1          _UxGT("Wait for the")
-    #define MSG_FILAMENT_CHANGE_LOAD_2          _UxGT("filament to load")
+    #define MSG_FILAMENT_CHANGE_LOAD_1          _UxGT("Wait for")
+    #define MSG_FILAMENT_CHANGE_LOAD_2          _UxGT("filament load")
   #endif
-  #ifndef MSG_FILAMENT_CHANGE_EXTRUDE_1
-    #define MSG_FILAMENT_CHANGE_EXTRUDE_1       _UxGT("Wait for the")
-    #define MSG_FILAMENT_CHANGE_EXTRUDE_2       _UxGT("filament to extrude")
+  #ifndef MSG_FILAMENT_CHANGE_PURGE_1
+    #define MSG_FILAMENT_CHANGE_PURGE_1         _UxGT("Wait for")
+    #define MSG_FILAMENT_CHANGE_PURGE_2         _UxGT("filament purge")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_RESUME_1
-    #define MSG_FILAMENT_CHANGE_RESUME_1        _UxGT("Wait for the")
-    #define MSG_FILAMENT_CHANGE_RESUME_2        _UxGT("print to resume")
+    #define MSG_FILAMENT_CHANGE_RESUME_1        _UxGT("Wait for print")
+    #define MSG_FILAMENT_CHANGE_RESUME_2        _UxGT("to resume")
   #endif
 #else // LCD_HEIGHT < 4
   #ifndef MSG_FILAMENT_CHANGE_INIT_1
@@ -967,8 +1064,8 @@
   #ifndef MSG_FILAMENT_CHANGE_LOAD_1
     #define MSG_FILAMENT_CHANGE_LOAD_1          _UxGT("Loading...")
   #endif
-  #ifndef MSG_FILAMENT_CHANGE_EXTRUDE_1
-    #define MSG_FILAMENT_CHANGE_EXTRUDE_1       _UxGT("Extruding...")
+  #ifndef MSG_FILAMENT_CHANGE_PURGE_1
+    #define MSG_FILAMENT_CHANGE_PURGE_1         _UxGT("Purging...")
   #endif
   #ifndef MSG_FILAMENT_CHANGE_RESUME_1
     #define MSG_FILAMENT_CHANGE_RESUME_1        _UxGT("Resuming...")
