@@ -122,6 +122,9 @@ uint16_t max_display_update_time = 0;
   void lcd_control_temperature_preheat_material2_settings_menu();
   void lcd_control_motion_menu();
   void lcd_control_filament_menu();
+  //VERTEX DELTA MENUS
+    void lcd_load_menu();
+    void lcd_unload_menu();					  									   
 
   #if ENABLED(LCD_INFO_MENU)
     #if ENABLED(PRINTCOUNTER)
@@ -736,7 +739,6 @@ void kill_screen(const char* lcd_msg) {
       #endif
       wait_for_heatup = false;
       lcd_setstatusPGM(PSTR(MSG_PRINT_ABORTED), -1);
-      lcd_return_to_status();
     }
 
   #endif // SDSUPPORT
@@ -750,11 +752,11 @@ void kill_screen(const char* lcd_msg) {
     void case_light_menu() {
       START_MENU();
       //
-      // ^ Main
+      // ^ Prepare
       //
-      MENU_BACK(MSG_MAIN);
-      MENU_ITEM_EDIT_CALLBACK(int3, MSG_CASE_LIGHT_BRIGHTNESS, &case_light_brightness, 0, 255, update_case_light, true);
+      MENU_BACK(MSG_PREPARE);
       MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
+      MENU_ITEM_EDIT_CALLBACK(int3, MSG_CASE_LIGHT_BRIGHTNESS, &case_light_brightness, 0, 100, update_case_light, true);
       END_MENU();
     }
   #endif // MENU_ITEM_CASE_LIGHT
@@ -895,25 +897,13 @@ void kill_screen(const char* lcd_msg) {
       MENU_ITEM(submenu, MSG_DEBUG_MENU, lcd_debug_menu);
     #endif
 
-    //
-    // Set Case light on/off/brightness
-    //
-    #if ENABLED(MENU_ITEM_CASE_LIGHT)
-      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
-        MENU_ITEM(submenu, MSG_CASE_LIGHT, case_light_menu);
-      }
-      else
-        MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
-    #endif
-
     if (planner.movesplanned() || IS_SD_PRINTING) {
       MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
     }
     else {
       MENU_ITEM(submenu, MSG_PREPARE, lcd_prepare_menu);
-      #if ENABLED(DELTA_CALIBRATION_MENU)
-        MENU_ITEM(submenu, MSG_DELTA_CALIBRATE, lcd_delta_calibrate_menu);
-      #endif
+
+	  
     }
     MENU_ITEM(submenu, MSG_CONTROL, lcd_control_menu);
 
@@ -940,13 +930,133 @@ void kill_screen(const char* lcd_msg) {
         #endif
       }
     #endif // SDSUPPORT
+	 #if ENABLED(DELTA_CALIBRATION_MENU)
+        MENU_ITEM(submenu, MSG_DELTA_CALIBRATE, lcd_delta_calibrate_menu);
+      #endif								   
 
     #if ENABLED(LCD_INFO_MENU)
       MENU_ITEM(submenu, MSG_INFO_MENU, lcd_info_menu);
-    #endif
-
+    #endif						  
     END_MENU();
   }
+   
+ static void lcd_load_menu_PLA_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S200\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+  
+  static void lcd_load_menu_ABS_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S250\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_load_menu_PET_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S240\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+
+    static void lcd_load_menu_TPU_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S220\nG92 E0\nM83\nG1 E640 F1500\nG1 E100 F100\nM400\nM82\nM104 S0"));
+  }
+  
+  static void lcd_unload_menu_PLA()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S200\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+  
+  static void lcd_unload_menu_ABS()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S250\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_PET()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S240\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_TPU()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S220\nG92 E0\nM83\nG1 E20 F200\nG1 E-800 F8000\nM400\nM82\nM104 S0"));
+  }
+  
+  static void lcd_load_menu_PLA()
+  {
+    if (lcd_clicked) { return lcd_load_menu_PLA_go(); }  
+    START_SCREEN();
+    STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+    STATIC_ITEM(MSG_LOAD_TEXT0, true);
+    STATIC_ITEM(MSG_LOAD_TEXT1, true);
+    STATIC_ITEM(MSG_LOAD_TEXT2, true);
+    STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+  
+  static void lcd_load_menu_ABS()
+  {
+    if (lcd_clicked) { return lcd_load_menu_ABS_go(); }  
+    START_SCREEN();
+    STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+    STATIC_ITEM(MSG_LOAD_TEXT0, true);
+    STATIC_ITEM(MSG_LOAD_TEXT1, true);
+    STATIC_ITEM(MSG_LOAD_TEXT2, true);
+    STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+  static void lcd_load_menu_PET()
+  {
+    if (lcd_clicked) { return lcd_load_menu_PET_go(); }  
+    START_SCREEN();
+    STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+    STATIC_ITEM(MSG_LOAD_TEXT0, true);
+    STATIC_ITEM(MSG_LOAD_TEXT1, true);
+    STATIC_ITEM(MSG_LOAD_TEXT2, true);
+    STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+    static void lcd_load_menu_TPU()
+  {
+    if (lcd_clicked) { return lcd_load_menu_TPU_go(); }  
+    START_SCREEN();
+    STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+    STATIC_ITEM(MSG_LOAD_TEXT0, true);
+    STATIC_ITEM(MSG_LOAD_TEXT1, true);
+    STATIC_ITEM(MSG_LOAD_TEXT2, true);
+    STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+	void lcd_load_menu()
+	{
+	  START_MENU();
+    MENU_BACK(MSG_PREPARE);
+    MENU_ITEM(submenu, MSG_LOAD_PLA, lcd_load_menu_PLA);
+    MENU_ITEM(submenu, MSG_LOAD_ABS, lcd_load_menu_ABS);
+    MENU_ITEM(submenu, MSG_LOAD_PET, lcd_load_menu_PET);
+    MENU_ITEM(submenu, MSG_LOAD_TPU, lcd_load_menu_TPU);
+	  END_MENU();
+	}
+
+	void lcd_unload_menu()
+	{
+	  START_MENU();
+    MENU_BACK(MSG_PREPARE);
+    MENU_ITEM(function, MSG_UNLOAD_PLA, lcd_unload_menu_PLA);
+    MENU_ITEM(function, MSG_UNLOAD_ABS, lcd_unload_menu_ABS);
+    MENU_ITEM(function, MSG_UNLOAD_PET, lcd_unload_menu_PET);
+    MENU_ITEM(function, MSG_UNLOAD_TPU, lcd_unload_menu_TPU);
+    END_MENU();
+	}
 
   /**
    *
@@ -1141,6 +1251,16 @@ void kill_screen(const char* lcd_msg) {
     // ^ Main
     //
     MENU_BACK(MSG_MAIN);
+
+    // Set Case light on/off/brightness
+    //
+    #if ENABLED(MENU_ITEM_CASE_LIGHT)
+      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+        MENU_ITEM(submenu, MSG_CASE_LIGHT, case_light_menu);
+      }
+      else
+        MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
+    #endif
 
     //
     // Speed:
@@ -2355,15 +2475,19 @@ void kill_screen(const char* lcd_msg) {
     // ^ Main
     //
     MENU_BACK(MSG_MAIN);
-
+	
+	//
+    // Set Case light on/off/brightness
     //
-    // Move Axis
-    //
-    #if ENABLED(DELTA)
-      if (axis_homed[Z_AXIS])
+    #if ENABLED(MENU_ITEM_CASE_LIGHT)
+      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+        MENU_ITEM(submenu, MSG_CASE_LIGHT, case_light_menu);
+      }
+      else
+        MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
     #endif
-        MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
 
+	
     //
     // Auto Home
     //
@@ -2385,9 +2509,16 @@ void kill_screen(const char* lcd_msg) {
       #endif
       MENU_ITEM(submenu, MSG_BED_LEVELING, lcd_bed_leveling);
     #elif PLANNER_LEVELING
-      MENU_ITEM(gcode, MSG_BED_LEVELING, PSTR("G28\nG29"));
+      MENU_ITEM(gcode, MSG_BED_LEVELING, PSTR("G28\nG29"));					 
     #endif
-
+	
+    // Move Axis
+    //
+    /*#if ENABLED(DELTA)
+      if (axis_homed[Z_AXIS])																						
+    #endif
+        MENU_ITEM(submenu, MSG_MOVE_AXIS, lcd_move_menu);
+     */
     #if HAS_M206_COMMAND
       //
       // Set Home Offsets
@@ -2395,12 +2526,13 @@ void kill_screen(const char* lcd_msg) {
       MENU_ITEM(function, MSG_SET_HOME_OFFSETS, lcd_set_home_offsets);
       //MENU_ITEM(gcode, MSG_SET_ORIGIN, PSTR("G92 X0 Y0 Z0"));
     #endif
-
+	
+    // Load
+    // Unload
     //
-    // Disable Steppers
-    //
-    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
-
+    MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_load_menu);
+															
+    MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_unload_menu);
     //
     // Change filament
     //
@@ -2424,6 +2556,7 @@ void kill_screen(const char* lcd_msg) {
       //
       // Preheat for Material 1 and 2
       //
+      /*
       #if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_3 != 0 || TEMP_SENSOR_4 != 0 || TEMP_SENSOR_BED != 0
         MENU_ITEM(submenu, MSG_PREHEAT_1, lcd_preheat_m1_menu);
         MENU_ITEM(submenu, MSG_PREHEAT_2, lcd_preheat_m2_menu);
@@ -2431,6 +2564,7 @@ void kill_screen(const char* lcd_msg) {
         MENU_ITEM(function, MSG_PREHEAT_1, lcd_preheat_m1_e0_only);
         MENU_ITEM(function, MSG_PREHEAT_2, lcd_preheat_m2_e0_only);
       #endif
+      */
 
     #endif // TEMP_SENSOR_0 != 0
 
@@ -2460,6 +2594,9 @@ void kill_screen(const char* lcd_msg) {
       MENU_ITEM(function, MSG_AUTOSTART, lcd_autostart_sd);
     #endif
 
+    // Disable Steppers													 
+    //
+    MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));												
     END_MENU();
   }
 
@@ -2522,7 +2659,7 @@ void kill_screen(const char* lcd_msg) {
       START_MENU();
       MENU_BACK(MSG_MAIN);
       #if ENABLED(DELTA_AUTO_CALIBRATION)
-        MENU_ITEM(gcode, MSG_DELTA_AUTO_CALIBRATE, PSTR("G33"));
+        MENU_ITEM(gcode, MSG_DELTA_AUTO_CALIBRATE, PSTR("M665 B50\nG33"));
         MENU_ITEM(gcode, MSG_DELTA_HEIGHT_CALIBRATE, PSTR("G33 P1"));
       #endif
       MENU_ITEM(submenu, MSG_AUTO_HOME, _lcd_delta_calibrate_home);
@@ -2809,7 +2946,7 @@ void kill_screen(const char* lcd_msg) {
     MENU_BACK(MSG_MAIN);
     MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
     MENU_ITEM(submenu, MSG_MOTION, lcd_control_motion_menu);
-    MENU_ITEM(submenu, MSG_FILAMENT, lcd_control_filament_menu);
+    //MENU_ITEM(submenu, MSG_FILAMENT, lcd_control_filament_menu);
 
     #if HAS_LCD_CONTRAST
       MENU_ITEM_EDIT_CALLBACK(int3, MSG_CONTRAST, (int*)&lcd_contrast, LCD_CONTRAST_MIN, LCD_CONTRAST_MAX, lcd_callback_set_contrast, true);
@@ -3044,12 +3181,12 @@ void kill_screen(const char* lcd_msg) {
     //
     // Preheat Material 1 conf
     //
-    MENU_ITEM(submenu, MSG_PREHEAT_1_SETTINGS, lcd_control_temperature_preheat_material1_settings_menu);
+    //MENU_ITEM(submenu, MSG_PREHEAT_1_SETTINGS, lcd_control_temperature_preheat_material1_settings_menu);
 
     //
     // Preheat Material 2 conf
     //
-    MENU_ITEM(submenu, MSG_PREHEAT_2_SETTINGS, lcd_control_temperature_preheat_material2_settings_menu);
+    //MENU_ITEM(submenu, MSG_PREHEAT_2_SETTINGS, lcd_control_temperature_preheat_material2_settings_menu);
     END_MENU();
   }
 
@@ -3549,13 +3686,10 @@ void kill_screen(const char* lcd_msg) {
     void lcd_info_printer_menu() {
       if (lcd_clicked) { return lcd_goto_previous_menu(); }
       START_SCREEN();
-      STATIC_ITEM(MSG_MARLIN, true, true);                             // Marlin
-      STATIC_ITEM(SHORT_BUILD_VERSION, true);                          // x.x.x-Branch
-      STATIC_ITEM(STRING_DISTRIBUTION_DATE, true);                     // YYYY-MM-DD HH:MM
-      STATIC_ITEM(MACHINE_NAME, true);                                 // My3DPrinter
-      STATIC_ITEM(WEBSITE_URL, true);                                  // www.my3dprinter.com
-      STATIC_ITEM(MSG_INFO_EXTRUDERS ": " STRINGIFY(EXTRUDERS), true); // Extruders: 2
-      #if ENABLED(AUTO_BED_LEVELING_3POINT)
+	  STATIC_ITEM(MSG_SPLASH_NAME, true, true);                        // VERTEX DELTA
+      STATIC_ITEM(MSG_SPLASH_FIRMWARE, true);
+      STATIC_ITEM("Config by: "STRING_CONFIG_H_AUTHOR, true);
+	  #if ENABLED(AUTO_BED_LEVELING_3POINT)
         STATIC_ITEM(MSG_3POINT_LEVELING, true);                        // 3-Point Leveling
       #elif ENABLED(AUTO_BED_LEVELING_LINEAR)
         STATIC_ITEM(MSG_LINEAR_LEVELING, true);                        // Linear Leveling
@@ -3566,6 +3700,14 @@ void kill_screen(const char* lcd_msg) {
       #elif ENABLED(MESH_BED_LEVELING)
         STATIC_ITEM(MSG_MESH_LEVELING, true);                          // Mesh Leveling
       #endif
+      STATIC_ITEM(MSG_SPLASH_WEBSITE1, true);
+      STATIC_ITEM(MSG_SPLASH_WEBSITE2, true);
+      STATIC_ITEM(MSG_SPLASH_WEBSITE3, true);
+      STATIC_ITEM(MSG_INFO_EXTRUDERS ": " STRINGIFY(EXTRUDERS), true); // Extruders: 1																																
+      STATIC_ITEM(MSG_MARLIN, true, true);                             // Marlin
+      STATIC_ITEM(SHORT_BUILD_VERSION, true);                          // x.x.x-Branch
+      STATIC_ITEM(STRING_DISTRIBUTION_DATE, true);                     // YYYY-MM-DD HH:MM																			 
+      STATIC_ITEM(WEBSITE_URL, true);                                  // 
       END_SCREEN();
     }
 

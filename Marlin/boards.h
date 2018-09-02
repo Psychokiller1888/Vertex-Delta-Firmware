@@ -66,6 +66,8 @@
 #define BOARD_3DRAG             77   // 3Drag Controller
 #define BOARD_K8200             78   // Velleman K8200 Controller (derived from 3Drag Controller)
 #define BOARD_K8400             79   // Velleman K8400 Controller (derived from 3Drag Controller)
+#define BOARD_K8600             75   // Velleman K8600 Controller		
+#define BOARD_K8800             76   // Velleman K8800 Controller															   																										   
 #define BOARD_TEENSYLU          8    // Teensylu
 #define BOARD_RUMBA             80   // Rumba
 #define BOARD_PRINTRBOARD       81   // Printrboard (AT90USB1286)

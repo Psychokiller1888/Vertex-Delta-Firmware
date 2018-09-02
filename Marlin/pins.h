@@ -115,6 +115,10 @@
   #include "pins_ULTIMAKER_OLD.h"
 #elif MB(ULTIMAIN_2)
   #include "pins_ULTIMAIN_2.h"
+#elif MB(K8600)
+  #include "pins_K8600.h"
+#elif MB(K8800)
+  #include "pins_K8800.h"				  			 								   
 #elif MB(3DRAG)
   #include "pins_3DRAG.h"
 #elif MB(K8200)
