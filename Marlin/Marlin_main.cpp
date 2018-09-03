@@ -7082,6 +7082,8 @@ inline void gcode_M17() {
         --did_pause_print;
       }
     #endif
+	
+	lcd_setstatusPGM(PSTR(MSG_VERTEX_PRINTING), -1);
   }
 
 #endif // ADVANCED_PAUSE_FEATURE
@@ -8037,6 +8039,11 @@ inline void gcode_M105() {
         }
       #endif // EXTRA_FAN_SPEED
       const uint16_t s = parser.ushortval('S', 255);
+      //Vertex Delta offset
+      if ((s <= 4)&&(s > 0)){
+        s = 5;
+      }
+      //Vertex Delta offset
       fanSpeeds[p] = MIN(s, 255U);
     }
   }
@@ -11555,7 +11562,7 @@ inline void gcode_M907() {
 
       SET_OUTPUT(CASE_LIGHT_PIN);
       if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN))
-        analogWrite(CASE_LIGHT_PIN, n10ct);
+        analogWrite(CASE_LIGHT_PIN, INVERT_CASE_LIGHT ? 255 - case_light_brightness : map(case_light_brightness, 0, 100, 0, 255) );
       else {
         const bool s = case_light_on ? !INVERT_CASE_LIGHT : INVERT_CASE_LIGHT;
         WRITE(CASE_LIGHT_PIN, s ? HIGH : LOW);
@@ -11580,7 +11587,11 @@ inline void gcode_M907() {
 inline void gcode_M355() {
   #if HAS_CASE_LIGHT
     uint8_t args = 0;
-    if (parser.seenval('P')) ++args, case_light_brightness = parser.value_byte();
+    //if (parser.seenval('P')) ++args, case_light_brightness = parser.value_byte();
+    if (parser.seenval('P')) {
+        ++args;
+        case_light_brightness = map(parser.value_byte(), 0, 255, 0, 100);
+    }
     if (parser.seenval('S')) ++args, case_light_on = parser.value_bool();
     if (args) update_case_light();
 

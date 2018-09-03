@@ -303,7 +303,7 @@ void lcd_printPGM_utf(const char *str, uint8_t n=LCD_WIDTH) {
           if (bottom < LCD_PIXEL_HEIGHT) u8g.drawBox(0, bottom, LCD_PIXEL_WIDTH, LCD_PIXEL_HEIGHT - bottom);
         #endif
       } while (u8g.nextPage());
-      safe_delay(CUSTOM_BOOTSCREEN_TIMEOUT);
+      safe_delay(200);
     }
 
   #endif // SHOW_CUSTOM_BOOTSCREEN
