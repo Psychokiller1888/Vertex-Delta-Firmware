@@ -106,7 +106,7 @@
 #endif
 #ifndef MSG_LOAD_TEXT2
   #define MSG_LOAD_TEXT2                      _UxGT("the tube. Press the")
-#endi
+#endif
 #ifndef MSG_LOAD_TEXT3
   #define MSG_LOAD_TEXT3                      _UxGT("button when ready.")
 #endif
@@ -119,16 +119,16 @@
 // End added Vertex Delta menu items
 
 #ifndef WELCOME_MSG
-  #define WELCOME_MSG                         MACHINE_NAME _UxGT(" Ready.")
+  #define WELCOME_MSG                         MACHINE_NAME _UxGT(" ready.")
 #endif
 #ifndef MSG_BACK
   #define MSG_BACK                            _UxGT("Back")
 #endif
 #ifndef MSG_SD_INSERTED
-  #define MSG_SD_INSERTED                     _UxGT("Card inserted")
+  #define MSG_SD_INSERTED                     _UxGT("SD card inserted")
 #endif
 #ifndef MSG_SD_REMOVED
-  #define MSG_SD_REMOVED                      _UxGT("Card removed")
+  #define MSG_SD_REMOVED                      _UxGT("SD card removed")
 #endif
 #ifndef MSG_LCD_ENDSTOPS
   #define MSG_LCD_ENDSTOPS                    _UxGT("Endstops") // Max length 8 characters

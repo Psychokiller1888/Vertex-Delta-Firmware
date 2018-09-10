@@ -128,6 +128,10 @@
   #include "pins_AZTEEG_X3_PRO.h"     // ATmega2560                                 env:megaatmega2560
 #elif MB(ULTIMAIN_2)
   #include "pins_ULTIMAIN_2.h"        // ATmega2560                                 env:megaatmega2560
+#elif MB(K8600)
+  #include "pins_K8600.h"
+#elif MB(K8800)
+  #include "pins_K8800.h"
 #elif MB(RUMBA)
   #include "pins_RUMBA.h"             // ATmega2560                                 env:megaatmega2560
 #elif MB(BQ_ZUM_MEGA_3D)
