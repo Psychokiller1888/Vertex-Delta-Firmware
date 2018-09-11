@@ -92,6 +92,8 @@
 
 // Enable to show the bitmap in Marlin/_Bootscreen.h on startup.
 #define SHOW_CUSTOM_BOOTSCREEN
+#define CUSTOM_BOOTSCREEN_BMPWIDTH 128
+#define CUSTOM_BOOTSCREEN_BMPHEIGHT 64
 
 // Enable to show the bitmap in Marlin/_Statusscreen.h on the status screen.
 //#define CUSTOM_STATUS_SCREEN_IMAGE
@@ -378,9 +380,9 @@
   #define DEFAULT_Kd 50.42
   
   // Ultimaker
-  #define DEFAULT_Kp 22.2
-  #define DEFAULT_Ki 1.08
-  #define DEFAULT_Kd 114
+  //#define DEFAULT_Kp 22.2
+  //#define DEFAULT_Ki 1.08
+  //#define DEFAULT_Kd 114
 
   // MakerGear
   //#define DEFAULT_Kp 7.0

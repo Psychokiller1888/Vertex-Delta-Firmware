@@ -898,7 +898,7 @@
   #define MSG_ERR_Z_HOMING                    MSG_HOME _UxGT(" ") MSG_X MSG_Y _UxGT(" ") MSG_FIRST
 #endif
 #ifndef MSG_HALTED
-  #define MSG_HALTED                          _UxGT("Vertex has halted!)
+  #define MSG_HALTED                          _UxGT("Vertex has halted!")
 #endif
 #ifndef MSG_PLEASE_RESET
   #define MSG_PLEASE_RESET                    _UxGT("Please power cycle")

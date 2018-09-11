@@ -78,7 +78,7 @@
 #define SUICIDE_PIN         -1
 
 #define LCD_SDSS            53
-#define BEEPER_PIN          23
+//#define BEEPER_PIN          23
 #define DOGLCD_CS           29
 #define DOGLCD_A0           27
 

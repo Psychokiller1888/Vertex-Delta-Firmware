@@ -8038,7 +8038,7 @@ inline void gcode_M105() {
           return;
         }
       #endif // EXTRA_FAN_SPEED
-      const uint16_t s = parser.ushortval('S', 255);
+      uint16_t s = parser.ushortval('S', 255);
       //Vertex Delta offset
       if ((s <= 4)&&(s > 0)){
         s = 5;
@@ -11549,10 +11549,9 @@ inline void gcode_M907() {
   #endif
 
   void update_case_light() {
-    const uint8_t i = case_light_on ? case_light_brightness : 0, n10ct = INVERT_CASE_LIGHT ? 255 - i : i;
 
     #if ENABLED(CASE_LIGHT_USE_NEOPIXEL)
-
+      const uint8_t i = case_light_on ? case_light_brightness : 0, n10ct = INVERT_CASE_LIGHT ? 255 - i : i;
       leds.set_color(
         MakeLEDColor(case_light_color.r, case_light_color.g, case_light_color.b, case_light_color.w, n10ct),
         false
