@@ -3,7 +3,8 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "D:/repositories/git/Vertex-Delta-Firmware/U8glib/src"
             ],
             "defines": [
                 "_DEBUG",

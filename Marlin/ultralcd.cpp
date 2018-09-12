@@ -303,22 +303,22 @@ uint16_t max_display_update_time = 0;
   #define _MENU_ITEM_PART_1(TYPE, ...) \
     if (_menuLineNr == _thisItemNr) { \
       if (encoderLine == _thisItemNr && lcd_clicked) { \
-        lcd_clicked = false
+        lcd_clicked = false;
 
-  #define _MENU_ITEM_PART_2(TYPE, PLABEL, ...) \
-        menu_action_ ## TYPE(__VA_ARGS__); \
-        if (screen_changed) return; \
-      } \
-      if (lcdDrawUpdate) \
-        lcd_implementation_drawmenu_ ## TYPE(encoderLine == _thisItemNr, _lcdLineNr, PLABEL, ## __VA_ARGS__); \
+        #define _MENU_ITEM_PART_2(TYPE, PLABEL, ...) \
+          menu_action_ ## TYPE(__VA_ARGS__); \
+          if (screen_changed) return; \
+        } \
+        if (lcdDrawUpdate) \
+          lcd_implementation_drawmenu_ ## TYPE(encoderLine == _thisItemNr, _lcdLineNr, PLABEL, ## __VA_ARGS__); \
     } \
-    ++_thisItemNr
+    ++_thisItemNr;
 
   #define MENU_ITEM_P(TYPE, PLABEL, ...) do { \
       _skipStatic = false; \
       _MENU_ITEM_PART_1(TYPE, ## __VA_ARGS__); \
       _MENU_ITEM_PART_2(TYPE, PLABEL, ## __VA_ARGS__); \
-    }while(0)
+    } while(0)
 
   #define MENU_ITEM(TYPE, LABEL, ...) MENU_ITEM_P(TYPE, PSTR(LABEL), ## __VA_ARGS__)
 
@@ -4193,7 +4193,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
       START_SCREEN();
 	  STATIC_ITEM(MSG_SPLASH_NAME, true, true);                        // VERTEX DELTA
       STATIC_ITEM(MSG_SPLASH_FIRMWARE, true);
-      STATIC_ITEM("Config by: "STRING_CONFIG_H_AUTHOR, true);
+      STATIC_ITEM("Config by: " STRING_CONFIG_H_AUTHOR, true);
 	  #if ENABLED(AUTO_BED_LEVELING_3POINT)
         STATIC_ITEM(MSG_3POINT_LEVELING, true);                        // 3-Point Leveling
       #elif ENABLED(AUTO_BED_LEVELING_LINEAR)
@@ -4283,7 +4283,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
     STATIC_ITEM(MSG_LOAD_TEXT2, true);
     STATIC_ITEM(MSG_LOAD_TEXT3, true);
     END_MENU();
-  }Ì
+  }
   
   static void lcd_load_menu_ABS() {
     if (lcd_clicked) { return lcd_load_menu_ABS_go(); }  
