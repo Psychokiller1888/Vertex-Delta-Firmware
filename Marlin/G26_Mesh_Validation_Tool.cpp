@@ -709,7 +709,7 @@
      *
      *  Filament is primed!
      *
-     *  It's  "Show Time" !!!
+     *  It's  "Show Time"
      */
 
     ZERO(circle_flags);

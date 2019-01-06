@@ -1184,7 +1184,7 @@ void Stepper::isr() {
       if (!nextAdvanceISR) nextAdvanceISR = Stepper::advance_isr();
     #endif
 
-    // ^== Time critical. NOTHING besides pulse generation should be above here!!!
+    // ^== Time critical. NOTHING besides pulse generation should be above here!
 
     // Run main stepping block processing ISR if we have to
     if (!nextMainISR) nextMainISR = Stepper::stepper_block_phase_isr();
