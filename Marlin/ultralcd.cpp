@@ -178,6 +178,9 @@ uint16_t max_display_update_time = 0;
   void lcd_control_menu();
   void lcd_control_temperature_menu();
   void lcd_control_motion_menu();
+  //VERTEX DELTA MENUS
+  void lcd_load_menu();
+  void lcd_unload_menu();
 
   #if DISABLED(SLIM_LCD_MENUS)
     void lcd_control_temperature_preheat_material1_settings_menu();
@@ -950,8 +953,8 @@ void lcd_quick_feedback(const bool clear_buttons) {
       //
       // ^ Main
       //
-      MENU_BACK(MSG_MAIN);
-      MENU_ITEM_EDIT_CALLBACK(int8, MSG_CASE_LIGHT_BRIGHTNESS, &case_light_brightness, 0, 255, update_case_light, true);
+      MENU_BACK(MSG_PREPARE);
+      MENU_ITEM_EDIT_CALLBACK(int8, MSG_CASE_LIGHT_BRIGHTNESS, &case_light_brightness, 0, 100, update_case_light, true);
       MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
       END_MENU();
     }
@@ -1148,6 +1151,124 @@ void lcd_quick_feedback(const bool clear_buttons) {
       MENU_ITEM(submenu, MSG_LED_CONTROL, lcd_led_menu);
     #endif
 
+    END_MENU();
+  }
+
+  static void lcd_load_menu_PLA_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S200\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_load_menu_ABS_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S250\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_load_menu_PET_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S240\nG92 E0\nM83\nG1 E640 F1500\nG1 E70 F100\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_load_menu_TPU_go()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S220\nG92 E0\nM83\nG1 E640 F1500\nG1 E100 F100\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_PLA()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S200\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_ABS()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S250\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_PET()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S240\nG92 E0\nM83\nG1 E20 F200\nG1 E-750 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_unload_menu_TPU()
+  {
+    lcd_return_to_status();
+    enqueue_and_echo_commands_P(PSTR("G28\nM109 S220\nG92 E0\nM83\nG1 E20 F200\nG1 E-800 F8000\nM400\nM82\nM104 S0"));
+  }
+
+  static void lcd_load_menu_PLA()
+  {
+    if (lcd_clicked) { return lcd_load_menu_PLA_go(); }
+    START_SCREEN();
+      STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+      STATIC_ITEM(MSG_LOAD_TEXT0, true);
+      STATIC_ITEM(MSG_LOAD_TEXT1, true);
+      STATIC_ITEM(MSG_LOAD_TEXT2, true);
+      STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+  static void lcd_load_menu_ABS()
+  {
+    if (lcd_clicked) { return lcd_load_menu_ABS_go(); }
+    START_SCREEN();
+      STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+      STATIC_ITEM(MSG_LOAD_TEXT0, true);
+      STATIC_ITEM(MSG_LOAD_TEXT1, true);
+      STATIC_ITEM(MSG_LOAD_TEXT2, true);
+      STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+  static void lcd_load_menu_PET()
+  {
+    if (lcd_clicked) { return lcd_load_menu_PET_go(); }
+    START_SCREEN();
+      STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+      STATIC_ITEM(MSG_LOAD_TEXT0, true);
+      STATIC_ITEM(MSG_LOAD_TEXT1, true);
+      STATIC_ITEM(MSG_LOAD_TEXT2, true);
+      STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+  static void lcd_load_menu_TPU()
+  {
+    if (lcd_clicked) { return lcd_load_menu_TPU_go(); }
+    START_SCREEN();
+      STATIC_ITEM(MSG_LOAD_TITLE, true, true);
+      STATIC_ITEM(MSG_LOAD_TEXT0, true);
+      STATIC_ITEM(MSG_LOAD_TEXT1, true);
+      STATIC_ITEM(MSG_LOAD_TEXT2, true);
+      STATIC_ITEM(MSG_LOAD_TEXT3, true);
+    END_MENU();
+  }
+
+  void lcd_load_menu()
+  {
+    START_MENU();
+      MENU_BACK(MSG_PREPARE);
+      MENU_ITEM(submenu, MSG_LOAD_PLA, lcd_load_menu_PLA);
+      MENU_ITEM(submenu, MSG_LOAD_ABS, lcd_load_menu_ABS);
+      MENU_ITEM(submenu, MSG_LOAD_PET, lcd_load_menu_PET);
+      MENU_ITEM(submenu, MSG_LOAD_TPU, lcd_load_menu_TPU);
+    END_MENU();
+  }
+
+  void lcd_unload_menu()
+  {
+    START_MENU();
+      MENU_BACK(MSG_PREPARE);
+      MENU_ITEM(function, MSG_UNLOAD_PLA, lcd_unload_menu_PLA);
+      MENU_ITEM(function, MSG_UNLOAD_ABS, lcd_unload_menu_ABS);
+      MENU_ITEM(function, MSG_UNLOAD_PET, lcd_unload_menu_PET);
+      MENU_ITEM(function, MSG_UNLOAD_TPU, lcd_unload_menu_TPU);
     END_MENU();
   }
 
