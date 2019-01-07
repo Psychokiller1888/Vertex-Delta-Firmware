@@ -1101,17 +1101,6 @@ void lcd_quick_feedback(const bool clear_buttons) {
       MENU_ITEM(submenu, MSG_DEBUG_MENU, lcd_debug_menu);
     #endif
 
-    //
-    // Set Case light on/off/brightness
-    //
-    #if ENABLED(MENU_ITEM_CASE_LIGHT)
-      if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
-        MENU_ITEM(submenu, MSG_CASE_LIGHT, case_light_menu);
-      }
-      else
-        MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
-    #endif
-
     if (planner.movesplanned() || IS_SD_PRINTING)
       MENU_ITEM(submenu, MSG_TUNE, lcd_tune_menu);
     else
@@ -2849,10 +2838,13 @@ void lcd_quick_feedback(const bool clear_buttons) {
     //
     MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
 
+    MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_load_menu);
+    MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_unload_menu);
+
     //
     // Change filament
     //
-    #if ENABLED(ADVANCED_PAUSE_FEATURE)
+    /*#if ENABLED(ADVANCED_PAUSE_FEATURE)
       if (!IS_SD_FILE_OPEN) {
         #if E_STEPPERS == 1 && !ENABLED(FILAMENT_LOAD_UNLOAD_GCODES)
           if (thermalManager.targetHotEnoughToExtrude(active_extruder))
@@ -2863,7 +2855,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
           MENU_ITEM(submenu, MSG_FILAMENTCHANGE, lcd_change_filament_menu);
         #endif
       }
-    #endif // ADVANCED_PAUSE_FEATURE
+    #endif // ADVANCED_PAUSE_FEATURE*/
 
     #if HAS_TEMP_HOTEND
 
@@ -2880,13 +2872,13 @@ void lcd_quick_feedback(const bool clear_buttons) {
       //
       // Preheat for Material 1 and 2
       //
-      #if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_3 != 0 || TEMP_SENSOR_4 != 0 || HAS_HEATED_BED
+      /*#if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_3 != 0 || TEMP_SENSOR_4 != 0 || HAS_HEATED_BED
         MENU_ITEM(submenu, MSG_PREHEAT_1, lcd_preheat_m1_menu);
         MENU_ITEM(submenu, MSG_PREHEAT_2, lcd_preheat_m2_menu);
       #else
         MENU_ITEM(function, MSG_PREHEAT_1, lcd_preheat_m1_e0_only);
         MENU_ITEM(function, MSG_PREHEAT_2, lcd_preheat_m2_e0_only);
-      #endif
+      #endif*/
 
     #endif // HAS_TEMP_HOTEND
 
@@ -3452,6 +3444,18 @@ void lcd_quick_feedback(const bool clear_buttons) {
   void lcd_control_menu() {
     START_MENU();
     MENU_BACK(MSG_MAIN);
+
+    //
+    // Set Case light on/off/brightness
+    //
+    #if ENABLED(MENU_ITEM_CASE_LIGHT)
+          if (USEABLE_HARDWARE_PWM(CASE_LIGHT_PIN)) {
+              MENU_ITEM(submenu, MSG_CASE_LIGHT, case_light_menu);
+          }
+          else
+              MENU_ITEM_EDIT_CALLBACK(bool, MSG_CASE_LIGHT, (bool*)&case_light_on, update_case_light);
+    #endif
+
     MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
     MENU_ITEM(submenu, MSG_MOTION, lcd_control_motion_menu);
 
