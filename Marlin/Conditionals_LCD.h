@@ -81,11 +81,10 @@
     #define DEFAULT_LCD_CONTRAST 140
     #define U8GLIB_ST7565_64128N
   #elif ENABLED(ELB_FULL_GRAPHIC_CONTROLLER)
-    #define LCD_CONTRAST_MIN      10
+    #define LCD_CONTRAST_MIN      0
     #define LCD_CONTRAST_MAX     100
     #define DEFAULT_LCD_CONTRAST  40
     #define U8GLIB_LM6059_AF
-    #define SD_DETECT_INVERTED
     #define REVERSE_MENU_DIRECTION
   #endif
 

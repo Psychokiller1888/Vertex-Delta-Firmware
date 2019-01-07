@@ -2872,13 +2872,13 @@ void lcd_quick_feedback(const bool clear_buttons) {
       //
       // Preheat for Material 1 and 2
       //
-      #if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_3 != 0 || TEMP_SENSOR_4 != 0 || HAS_HEATED_BED
-        MENU_ITEM(submenu, MSG_PREHEAT_1, lcd_preheat_m1_menu);
-        MENU_ITEM(submenu, MSG_PREHEAT_2, lcd_preheat_m2_menu);
-      #else
-        MENU_ITEM(function, MSG_PREHEAT_1, lcd_preheat_m1_e0_only);
-        MENU_ITEM(function, MSG_PREHEAT_2, lcd_preheat_m2_e0_only);
-      #endif
+      //#if TEMP_SENSOR_1 != 0 || TEMP_SENSOR_2 != 0 || TEMP_SENSOR_3 != 0 || TEMP_SENSOR_4 != 0 || HAS_HEATED_BED
+      //  MENU_ITEM(submenu, MSG_PREHEAT_1, lcd_preheat_m1_menu);
+      //  MENU_ITEM(submenu, MSG_PREHEAT_2, lcd_preheat_m2_menu);
+      //#else
+      //  MENU_ITEM(function, MSG_PREHEAT_1, lcd_preheat_m1_e0_only);
+      //  MENU_ITEM(function, MSG_PREHEAT_2, lcd_preheat_m2_e0_only);
+      //#endif
 
     #endif // HAS_TEMP_HOTEND
 
