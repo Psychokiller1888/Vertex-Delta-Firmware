@@ -3459,6 +3459,10 @@ void lcd_quick_feedback(const bool clear_buttons) {
     MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
     MENU_ITEM(submenu, MSG_MOTION, lcd_control_motion_menu);
 
+    /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+      MENU_ITEM(submenu, MSG_BED_LEVELING_AND_CAL, lcd_control_leveling_and_calibration_menu);
+    #endif*/
+
     #if DISABLED(NO_VOLUMETRICS) || ENABLED(ADVANCED_PAUSE_FEATURE)
       MENU_ITEM(submenu, MSG_FILAMENT, lcd_control_filament_menu);
     #elif ENABLED(LIN_ADVANCE)
@@ -4052,6 +4056,22 @@ void lcd_quick_feedback(const bool clear_buttons) {
       END_MENU();
     }
   #endif // !NO_VOLUMETRICS || ADVANCED_PAUSE_FEATURE
+
+  /**
+   *
+   * "Control" > "Calibration and leveling" submenu
+   *
+   */
+  /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    void lcd_control_leveling_and_calibration_menu() {
+      START_MENU();
+      MENU_BACK(MSG_CONTROL);
+      MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_X, &leveling_and_cal.grid_max_points_x, 3, 15);
+      MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_Y, &leveling_and_cal.grid_max_points_y, 3, 15);
+      //MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_Y, &fwretract.retract_length, 3, 15);
+      END_MENU();
+    }
+  #endif*/
 
   /**
    *

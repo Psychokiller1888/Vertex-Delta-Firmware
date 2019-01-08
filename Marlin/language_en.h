@@ -1083,6 +1083,15 @@
 #ifndef MSG_M600_TOO_COLD
   #define MSG_M600_TOO_COLD                   _UxGT("M600: Too cold")
 #endif
+#ifndef MSG_BED_LEVELING_AND_CAL
+  #define MSG_BED_LEVELING_AND_CAL            _UxGT("Calibration and leveling")
+#endif
+#ifndef MSG_GRID_MAX_POINTS_X
+  #define MSG_GRID_MAX_POINTS_X               _UxGT("Max points in X")
+#endif
+#ifndef MSG_GRID_MAX_POINTS_Y
+  #define MSG_GRID_MAX_POINTS_Y               _UxGT("Max points in Y")
+#endif
 
 //
 // Filament Change screens show up to 3 lines on a 4-line display

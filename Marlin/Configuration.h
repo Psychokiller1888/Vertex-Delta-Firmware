@@ -536,7 +536,7 @@
   #define DELTA_PRINTABLE_RADIUS 100.0 // mm
 
   // Center-to-center distance of the holes in the diagonal push rods.
-  #define DELTA_DIAGONAL_ROD 206.9 // mm
+  #define DELTA_DIAGONAL_ROD 207 // mm
 
   // height from z=0 to home position
   #define DELTA_HEIGHT 308.00 // get this value from auto calibrate
@@ -1139,7 +1139,7 @@
   // Set the number of grid points per dimension.
   // Works best with 5 or more points in each dimension.
   #define GRID_MAX_POINTS_X 5
-  #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
+  #define GRID_MAX_POINTS_Y 5
 
   // Set the boundaries for probing (where the probe can reach).
   #define LEFT_PROBE_BED_POSITION -(DELTA_PRINTABLE_RADIUS -(MIN_PROBE_EDGE))
@@ -1395,9 +1395,9 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z }
-  #define NOZZLE_PARK_POINT { 0, 0, MANUAL_Z_HOME_POS }
-  #define NOZZLE_PARK_XY_FEEDRATE 100   // X and Y axes feedrate in mm/s (also used for delta printers Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE 5      // Z axis feedrate in mm/s (not used for delta printers)
+  #define NOZZLE_PARK_POINT { 0, 0, 50 }
+  #define NOZZLE_PARK_XY_FEEDRATE 120   // X and Y axes feedrate in mm/s (also used for delta printers Z axis)
+  #define NOZZLE_PARK_Z_FEEDRATE 120      // Z axis feedrate in mm/s (not used for delta printers)
 #endif
 
 /**
