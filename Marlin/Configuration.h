@@ -678,7 +678,7 @@
 //#define DEFAULT_XYZ_STEPS_PER_UNIT ((XYZ_FULL_STEPS_PER_ROTATION) * (XYZ_MICROSTEPS) / double(XYZ_BELT_PITCH) / double(XYZ_PULLEY_TEETH))
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   { DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, DEFAULT_XYZ_STEPS_PER_UNIT, 760*1.1 }  // default steps per unit for Kossel (GT2, 20 tooth)
 #define DEFAULT_XYZ_STEPS_PER_UNIT 116.360
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 116.360, 116.360, 116.360, 148.700 }  // default steps per unit for Kossel - Velleman
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 116.360, 116.360, 116.360, 154.895 }  // default steps per unit for Kossel - Velleman
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -1299,7 +1299,7 @@
  *    +-------------->X     +-------------->X     +-------------->Y
  *     XY_SKEW_FACTOR        XZ_SKEW_FACTOR        YZ_SKEW_FACTOR
  */
-#define SKEW_CORRECTION
+//#define SKEW_CORRECTION
 
 #if ENABLED(SKEW_CORRECTION)
   // Input all length measurements here:
