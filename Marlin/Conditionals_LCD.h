@@ -83,7 +83,7 @@
   #elif ENABLED(ELB_FULL_GRAPHIC_CONTROLLER)
     #define LCD_CONTRAST_MIN      0
     #define LCD_CONTRAST_MAX     100
-    #define DEFAULT_LCD_CONTRAST  40
+    #define DEFAULT_LCD_CONTRAST  20
     #define U8GLIB_LM6059_AF
     #define REVERSE_MENU_DIRECTION
   #endif
