@@ -40,36 +40,17 @@
   #define CHARSIZE 1
 #endif
 
-// Start added Vertex Delta menu items
-// Start Splashscreen
-#ifndef MSG_SPLASH_NAME
-  #define MSG_SPLASH_NAME                    _UxGT("VERTEX DELTA")
-#endif
-#ifndef MSG_SPLASH_WEBSITE1
-  #define MSG_SPLASH_WEBSITE1                _UxGT("github.com/Psychokiller1888/Vertex-Delta-Firmware")
-#endif
-#ifndef MSG_SPLASH_WEBSITE2
-  #define MSG_SPLASH_WEBSITE2                _UxGT("laurentchervet@bluewin.ch")
-#endif
-#ifndef MSG_SPLASH_WEBSITE3
-  #define MSG_SPLASH_WEBSITE3                _UxGT("vellemanprojects.eu")
-#endif
-#ifndef MSG_BOOT_LINE2
-  #define MSG_BOOT_LINE2                     _UxGT("VERTEX DELTA")
-#endif
-// End Splashscreen
-
 #ifndef MSG_FIRMWARE
-  #define MSG_FIRMWARE                        _UxGT("Firmware version")
+  #define MSG_FIRMWARE         _UxGT("Firmware version")
 #endif
 #ifndef MSG_LED_MENU
-  #define MSG_LED_MENU 					  _UxGT("Set LED color")
+  #define MSG_LED_MENU         _UxGT("Set LED color")
 #endif
 #ifndef MSG_LOAD_FILAMENT
-  #define MSG_LOAD_FILAMENT 				  _UxGT("Load filament")
+  #define MSG_LOAD_FILAMENT    _UxGT("Load filament")
 #endif
 #ifndef MSG_UNLOAD_FILAMENT
-  #define MSG_UNLOAD_FILAMENT 			  _UxGT("Unload filament")
+  #define MSG_UNLOAD_FILAMENT  _UxGT("Unload filament")
 #endif
 #ifndef MSG_LOAD_ABS
   #define MSG_LOAD_ABS         _UxGT("Load ABS filament")
@@ -99,7 +80,7 @@
   #define MSG_LOAD_TEXT0         _UxGT("Insert filament until")
 #endif
 #ifndef MSG_LOAD_TEXT1
-  #define MSG_LOAD_TEXT1         _UxGT("3cm is visible in")
+  #define MSG_LOAD_TEXT1         _UxGT("you start seing it in")
 #endif
 #ifndef MSG_LOAD_TEXT2
   #define MSG_LOAD_TEXT2         _UxGT("the tube. Press the")
@@ -131,7 +112,7 @@
   #define MSG_LCD_ENDSTOPS                    _UxGT("Endstops") // Max length 8 characters
 #endif
 #ifndef MSG_LCD_SOFT_ENDSTOPS
-  #define MSG_LCD_SOFT_ENDSTOPS               _UxGT("Soft Endstops")
+  #define MSG_LCD_SOFT_ENDSTOPS               _UxGT("Soft endstops")
 #endif
 #ifndef MSG_MAIN
   #define MSG_MAIN                            _UxGT("Main")
@@ -1000,7 +981,7 @@
   #define MSG_CASE_LIGHT                      _UxGT("Case light")
 #endif
 #ifndef MSG_CASE_LIGHT_BRIGHTNESS
-  #define MSG_CASE_LIGHT_BRIGHTNESS           _UxGT("Light BRIGHTNESS")
+  #define MSG_CASE_LIGHT_BRIGHTNESS           _UxGT("Light brightness")
 #endif
 #if LCD_WIDTH >= 20
   #ifndef MSG_INFO_PRINT_COUNT

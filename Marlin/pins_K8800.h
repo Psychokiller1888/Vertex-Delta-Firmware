@@ -29,7 +29,7 @@
 #endif
 
 #define DEFAULT_MACHINE_NAME    "Vertex Delta"
-#define DEFAULT_SOURCE_CODE_URL "https://www.velleman.eu"
+#define DEFAULT_SOURCE_CODE_URL "https://github.com/Psychokiller1888/Vertex-Delta-Firmware"
 #define BOARD_NAME              "K8800 MOTHERBOARD"
 
 //#define LCD_SCREEN_ROT_180
@@ -78,25 +78,20 @@
 #define SUICIDE_PIN         -1
 
 #define LCD_SDSS            53
-#define BEEPER_PIN          23
 #define DOGLCD_CS           29
 #define DOGLCD_A0           27
 
-#if ENABLED(ULTRA_LCD)
+#define BEEPER_PIN        6
 
-    #define BEEPER_PIN        6
+#define LCD_PINS_RS       27
+#define LCD_PINS_ENABLE   29
+#define LCD_PINS_D4       37
+#define LCD_PINS_D5       35
+#define LCD_PINS_D6       33
+#define LCD_PINS_D7       31
 
-    #define LCD_PINS_RS       27 
-    #define LCD_PINS_ENABLE   29
-    #define LCD_PINS_D4       37
-    #define LCD_PINS_D5       35 
-    #define LCD_PINS_D6       33
-    #define LCD_PINS_D7       31
+#define BTN_EN1           17
+#define BTN_EN2           16
+#define BTN_ENC           23 //BUTTON
 
-    #define BTN_EN1           17
-    #define BTN_EN2           16
-    #define BTN_ENC           23 //BUTTON
-
-    #define SD_DETECT_PIN     21 //PD0
-
-#endif // ULTRA_LCD
+#define SD_DETECT_PIN     21 //PD0
