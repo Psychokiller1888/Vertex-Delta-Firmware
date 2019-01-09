@@ -178,9 +178,10 @@ uint16_t max_display_update_time = 0;
   void lcd_control_menu();
   void lcd_control_temperature_menu();
   void lcd_control_motion_menu();
+
   //VERTEX DELTA MENUS
-  void lcd_load_menu();
-  void lcd_unload_menu();
+  void lcd_filament_load_menu();
+  void lcd_filament_unload_menu();
 
   #if DISABLED(SLIM_LCD_MENUS)
     void lcd_control_temperature_preheat_material1_settings_menu();
@@ -1239,7 +1240,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
     END_MENU();
   }
 
-  void lcd_load_menu()
+  void lcd_filament_load_menu()
   {
     START_MENU();
       MENU_BACK(MSG_PREPARE);
@@ -1250,7 +1251,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
     END_MENU();
   }
 
-  void lcd_unload_menu()
+  void lcd_filament_unload_menu()
   {
     START_MENU();
       MENU_BACK(MSG_PREPARE);
@@ -3459,9 +3460,9 @@ void lcd_quick_feedback(const bool clear_buttons) {
     MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
     MENU_ITEM(submenu, MSG_MOTION, lcd_control_motion_menu);
 
-    /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
       MENU_ITEM(submenu, MSG_BED_LEVELING_AND_CAL, lcd_control_leveling_and_calibration_menu);
-    #endif*/
+    #endif
 
     #if DISABLED(NO_VOLUMETRICS) || ENABLED(ADVANCED_PAUSE_FEATURE)
       MENU_ITEM(submenu, MSG_FILAMENT, lcd_control_filament_menu);
@@ -4062,7 +4063,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
    * "Control" > "Calibration and leveling" submenu
    *
    */
-  /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
     void lcd_control_leveling_and_calibration_menu() {
       START_MENU();
       MENU_BACK(MSG_CONTROL);
@@ -4071,7 +4072,7 @@ void lcd_quick_feedback(const bool clear_buttons) {
       //MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_Y, &fwretract.retract_length, 3, 15);
       END_MENU();
     }
-  #endif*/
+  #endif
 
   /**
    *
