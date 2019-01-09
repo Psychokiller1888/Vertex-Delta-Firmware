@@ -219,6 +219,12 @@ typedef struct SettingsDataStruct {
   int16_t lcd_contrast;                                // M250 C
 
   //
+  // ABL MAX POINTS
+  //
+  int16_t abl_grid_max_points_x;
+  int16_t abl_grid_max_points_y;
+
+  //
   // FWRETRACT
   //
   bool autoretract_enabled;                             // M209 S
@@ -687,6 +693,13 @@ void MarlinSettings::postprocess() {
       const int16_t lcd_contrast = 32;
     #endif
     EEPROM_WRITE(lcd_contrast);
+
+    #if !ENABLED(AUTO_BED_LEVELING_LINEAR) && !ENABLED(AUTO_BED_LEVELING_BILINEAR)
+      const int16_t abl_grid_max_points_x = GRID_MAX_POINTS_X;
+      const int16_t abl_grid_max_points_y = GRID_MAX_POINTS_Y;
+    #endif
+    EEPROM_WRITE(abl_grid_max_points_x);
+    EEPROM_WRITE(abl_grid_max_points_y);
 
     #if DISABLED(FWRETRACT)
       const bool autoretract_enabled = false;
@@ -1324,6 +1337,13 @@ void MarlinSettings::postprocess() {
       #endif
       EEPROM_READ(lcd_contrast);
 
+      #if !ENABLED(AUTO_BED_LEVELING_LINEAR) && !ENABLED(AUTO_BED_LEVELING_BILINEAR)
+        const int16_t abl_grid_max_points_x;
+        const int16_t abl_grid_max_points_y;
+      #endif
+      EEPROM_READ(abl_grid_max_points_x);
+      EEPROM_READ(abl_grid_max_points_y);
+
       //
       // Firmware Retraction
       //
@@ -1928,6 +1948,11 @@ void MarlinSettings::reset() {
     lcd_contrast = DEFAULT_LCD_CONTRAST;
   #endif
 
+  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    abl_grid_max_points_x = GRID_MAX_POINTS_X;
+    abl_grid_max_points_y = GRID_MAX_POINTS_Y;
+  #endif
+
   #if ENABLED(FWRETRACT)
     fwretract.reset();
   #endif
@@ -2480,6 +2505,16 @@ void MarlinSettings::reset() {
       }
       CONFIG_ECHO_START;
       SERIAL_ECHOLNPAIR("  M250 C", lcd_contrast);
+    #endif
+
+    #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+      if (!forReplay) {
+        CONFIG_ECHO_START;
+        SERIAL_ECHOLNPGM("Abl grid max points:");
+      }
+      CONFIG_ECHO_START;
+      SERIAL_ECHOPAIR(" X", abl_grid_max_points_x);
+      SERIAL_ECHOPAIR(" Y", abl_grid_max_points_y);
     #endif
 
     #if ENABLED(FWRETRACT)

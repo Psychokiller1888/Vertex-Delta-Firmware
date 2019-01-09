@@ -1065,7 +1065,7 @@
   #define MSG_M600_TOO_COLD                   _UxGT("M600: Too cold")
 #endif
 #ifndef MSG_BED_LEVELING_AND_CAL
-  #define MSG_BED_LEVELING_AND_CAL            _UxGT("Calibration and leveling")
+  #define MSG_BED_LEVELING_AND_CAL            _UxGT("Bed leveling options")
 #endif
 #ifndef MSG_GRID_MAX_POINTS_X
   #define MSG_GRID_MAX_POINTS_X               _UxGT("Max points in X")

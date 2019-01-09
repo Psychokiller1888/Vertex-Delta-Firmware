@@ -40,8 +40,9 @@
 #if ENABLED(ULTRA_LCD)
 
   #include "Marlin.h"
+#include "types.h"
 
-  int16_t utf8_strlen(const char* s);
+int16_t utf8_strlen(const char* s);
   int16_t utf8_strlen_P(const char* s);
   bool lcd_hasstatus();
   void lcd_setstatus(const char* message, const bool persist=false);
@@ -77,6 +78,14 @@
   #if ENABLED(DOGLCD)
     extern int16_t lcd_contrast;
     void set_lcd_contrast(const int16_t value);
+  #endif
+
+  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    extern int16_t abl_grid_max_points_x;
+    void set_abl_grid_max_points_x(const int16_t value);
+
+    extern int16_t abl_grid_max_points_y;
+    void set_abl_grid_max_points_y(const int16_t value);
   #endif
 
   #if ENABLED(SHOW_BOOTSCREEN)

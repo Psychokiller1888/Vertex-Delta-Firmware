@@ -175,7 +175,7 @@ uint16_t max_display_update_time = 0;
   void lcd_tune_menu();
   void lcd_prepare_menu();
   void lcd_move_menu();
-  void lcd_control_menu();
+  void lcd_control_menu(); // Settings
   void lcd_control_temperature_menu();
   void lcd_control_motion_menu();
 
@@ -232,6 +232,10 @@ uint16_t max_display_update_time = 0;
   #if ENABLED(ENABLE_LEVELING_FADE_HEIGHT)
     static float new_z_fade_height;
     void _lcd_set_z_fade_height() { set_z_fade_height(new_z_fade_height); }
+  #endif
+
+  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    void lcd_control_leveling_and_calibration_menu();
   #endif
 
   ////////////////////////////////////////////
@@ -2839,8 +2843,8 @@ void lcd_quick_feedback(const bool clear_buttons) {
     //
     MENU_ITEM(gcode, MSG_DISABLE_STEPPERS, PSTR("M84"));
 
-    MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_load_menu);
-    MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_unload_menu);
+    MENU_ITEM(submenu, MSG_LOAD_FILAMENT, lcd_filament_load_menu);
+    MENU_ITEM(submenu, MSG_UNLOAD_FILAMENT, lcd_filament_unload_menu);
 
     //
     // Change filament
@@ -3419,6 +3423,11 @@ void lcd_quick_feedback(const bool clear_buttons) {
 
   #if HAS_LCD_CONTRAST
     void lcd_callback_set_contrast() { set_lcd_contrast(lcd_contrast); }
+  #endif
+
+  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    void set_callback_abl_grid_max_points_x() { set_abl_grid_max_points_x(abl_grid_max_points_x); }
+    void set_callback_abl_grid_max_points_y() { set_abl_grid_max_points_y(abl_grid_max_points_y); }
   #endif
 
   static void lcd_factory_settings() {
@@ -4067,9 +4076,8 @@ void lcd_quick_feedback(const bool clear_buttons) {
     void lcd_control_leveling_and_calibration_menu() {
       START_MENU();
       MENU_BACK(MSG_CONTROL);
-      MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_X, &leveling_and_cal.grid_max_points_x, 3, 15);
-      MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_Y, &leveling_and_cal.grid_max_points_y, 3, 15);
-      //MENU_ITEM_EDIT(int3, MSG_GRID_MAX_POINTS_Y, &fwretract.retract_length, 3, 15);
+      MENU_ITEM_EDIT_CALLBACK(int3, MSG_GRID_MAX_POINTS_X, &abl_grid_max_points_x, 3, 15, set_callback_abl_grid_max_points_x);
+      MENU_ITEM_EDIT_CALLBACK(int3, MSG_GRID_MAX_POINTS_Y, &abl_grid_max_points_y, 3, 15, set_callback_abl_grid_max_points_y);
       END_MENU();
     }
   #endif
@@ -5648,6 +5656,15 @@ void lcd_reset_alert_level() { lcd_status_message_level = 0; }
     u8g.setContrast(lcd_contrast);
   }
 
+#endif
+
+#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+  void set_abl_grid_max_points_x(const int16_t value) {
+    abl_grid_max_points_x = constrain(value, 3, 15);
+  }
+  void set_abl_grid_max_points_y(const int16_t value) {
+    abl_grid_max_points_y = constrain(value, 3, 15);
+  }
 #endif
 
 #if ENABLED(ULTIPANEL)

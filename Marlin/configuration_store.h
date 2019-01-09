@@ -63,6 +63,10 @@ class MarlinSettings {
         //static void delete_mesh();    // necessary if we have a MAT
         //static void defrag_meshes();  // "
       #endif
+
+      #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+
+      #endif
     #else
       FORCE_INLINE
       static bool load() { reset(); report(); return true; }
