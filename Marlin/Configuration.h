@@ -533,10 +533,10 @@
   #endif
 
   // Print surface diameter/2 minus unreachable space (avoid collisions with vertical towers).
-  #define DELTA_PRINTABLE_RADIUS 100.0 // mm
+  #define DELTA_PRINTABLE_RADIUS 100.00 // mm
 
   // Center-to-center distance of the holes in the diagonal push rods.
-  #define DELTA_DIAGONAL_ROD 207 // mm
+  #define DELTA_DIAGONAL_ROD 207.00 // mm
 
   // height from z=0 to home position
   #define DELTA_HEIGHT 308.00 // get this value from auto calibrate
