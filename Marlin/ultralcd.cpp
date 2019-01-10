@@ -234,9 +234,9 @@ uint16_t max_display_update_time = 0;
     void _lcd_set_z_fade_height() { set_z_fade_height(new_z_fade_height); }
   #endif
 
-  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+  /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
     void lcd_control_leveling_and_calibration_menu();
-  #endif
+  #endif*/
 
   ////////////////////////////////////////////
   //////////// Menu System Actions ///////////
@@ -3469,9 +3469,9 @@ void lcd_quick_feedback(const bool clear_buttons) {
     MENU_ITEM(submenu, MSG_TEMPERATURE, lcd_control_temperature_menu);
     MENU_ITEM(submenu, MSG_MOTION, lcd_control_motion_menu);
 
-    #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
+    /*#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
       MENU_ITEM(submenu, MSG_BED_LEVELING_AND_CAL, lcd_control_leveling_and_calibration_menu);
-    #endif
+    #endif*/
 
     #if DISABLED(NO_VOLUMETRICS) || ENABLED(ADVANCED_PAUSE_FEATURE)
       MENU_ITEM(submenu, MSG_FILAMENT, lcd_control_filament_menu);
