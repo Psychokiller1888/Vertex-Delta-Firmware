@@ -6938,7 +6938,7 @@ inline void gcode_M17() {
       if (ELAPSED(ms, next_buzz)) {
         if (max_beep_count < 0 || runout_beep < max_beep_count + 5) { // Only beep as long as we're supposed to
           next_buzz = ms + ((max_beep_count < 0 || runout_beep < max_beep_count) ? 1000 : 500);
-          BUZZ(50, 880 - (runout_beep & 1) * 220);
+          BUZZ(50, 1760 - (runout_beep & 1) * 440);
           runout_beep++;
         }
       }
