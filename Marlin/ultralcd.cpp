@@ -1630,9 +1630,9 @@ void lcd_quick_feedback(const bool clear_buttons) {
         // https://github.com/Psychokiller1888/Vertex-Delta-Firmware/issues/9
         #if E_STEPPERS == 1
           if (thermalManager.targetHotEnoughToExtrude(active_extruder))
-              MENU_ITEM(gcode, MSG_FILAMENTCHANGE, PSTR("M600 B0"));
+            MENU_ITEM(gcode, MSG_FILAMENTCHANGE, PSTR("M600 B0"));
           else
-              MENU_ITEM(submenu, MSG_FILAMENTCHANGE, lcd_temp_menu_e0_filament_change);
+            MENU_ITEM(submenu, MSG_FILAMENTCHANGE, lcd_change_filament_menu);
         #else
           MENU_ITEM(submenu, MSG_FILAMENTCHANGE, lcd_change_filament_menu);
         #endif
