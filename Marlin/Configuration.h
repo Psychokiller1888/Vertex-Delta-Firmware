@@ -76,8 +76,8 @@
 // build by the user have been successfully uploaded into firmware.
 #define STRING_CONFIG_H_AUTHOR "Psychokiller1888" // Who made the changes.
 #define SHOW_BOOTSCREEN
-#define STRING_SPLASH_LINE1 "0.1a" // will be shown during bootup in line 1
-#define STRING_SPLASH_LINE2 "https://github.com/Psychokiller1888"         // will be shown during bootup in line 2
+#define STRING_SPLASH_LINE1 "0.3a" // will be shown during bootup in line 1
+#define STRING_SPLASH_LINE2 "bit.ly/vertexd"         // will be shown during bootup in line 2
 
 /**
  * *** VENDORS PLEASE READ ***
