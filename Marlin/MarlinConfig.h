@@ -27,9 +27,11 @@
 #include "macros.h"
 #include "Version.h"
 #include "Configuration.h"
+#include "Configuration_user_override.h"
 #include "Conditionals_LCD.h"
 #include "drivers.h"
 #include "Configuration_adv.h"
+#include "Configuration_adv_user_override.h"
 
 #if USE_MARLINSERIAL
   #define HardwareSerial_h // trick to disable the standard HWserial
