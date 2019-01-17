@@ -924,13 +924,13 @@
   #define MSG_DELTA_AUTO_CALIBRATE            _UxGT("Auto Calibration")
 #endif
 #ifndef MSG_DELTA_HEIGHT_CALIBRATE
-  #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Set vertex height")
+  #define MSG_DELTA_HEIGHT_CALIBRATE          _UxGT("Calibrate height")
 #endif
 #ifndef MSG_DELTA_Z_OFFSET_CALIBRATE
   #define MSG_DELTA_Z_OFFSET_CALIBRATE        _UxGT("Probe Z-offset")
 #endif
 #ifndef MSG_DELTA_DIAG_ROD
-  #define MSG_DELTA_DIAG_ROD                  _UxGT("Diag Rod")
+  #define MSG_DELTA_DIAG_ROD                  _UxGT("Diagonal rod")
 #endif
 #ifndef MSG_DELTA_HEIGHT
   #define MSG_DELTA_HEIGHT                    _UxGT("Height")
