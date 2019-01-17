@@ -80,14 +80,6 @@ int16_t utf8_strlen(const char* s);
     void set_lcd_contrast(const int16_t value);
   #endif
 
-  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
-    extern int16_t abl_grid_max_points_x;
-    void set_abl_grid_max_points_x(const int16_t value);
-
-    extern int16_t abl_grid_max_points_y;
-    void set_abl_grid_max_points_y(const int16_t value);
-  #endif
-
   #if ENABLED(SHOW_BOOTSCREEN)
     void lcd_bootscreen();
   #endif

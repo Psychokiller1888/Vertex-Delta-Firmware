@@ -3434,11 +3434,6 @@ void lcd_quick_feedback(const bool clear_buttons) {
     void lcd_callback_set_contrast() { set_lcd_contrast(lcd_contrast); }
   #endif
 
-  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
-    void set_callback_abl_grid_max_points_x() { set_abl_grid_max_points_x(abl_grid_max_points_x); }
-    void set_callback_abl_grid_max_points_y() { set_abl_grid_max_points_y(abl_grid_max_points_y); }
-  #endif
-
   static void lcd_factory_settings() {
     settings.reset();
     lcd_completion_feedback();
@@ -4075,21 +4070,6 @@ void lcd_quick_feedback(const bool clear_buttons) {
       END_MENU();
     }
   #endif // !NO_VOLUMETRICS || ADVANCED_PAUSE_FEATURE
-
-  /**
-   *
-   * "Control" > "Calibration and leveling" submenu
-   *
-   */
-  #if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
-    void lcd_control_leveling_and_calibration_menu() {
-      START_MENU();
-      MENU_BACK(MSG_CONTROL);
-      MENU_ITEM_EDIT_CALLBACK(int3, MSG_GRID_MAX_POINTS_X, &abl_grid_max_points_x, 3, 15, set_callback_abl_grid_max_points_x);
-      MENU_ITEM_EDIT_CALLBACK(int3, MSG_GRID_MAX_POINTS_Y, &abl_grid_max_points_y, 3, 15, set_callback_abl_grid_max_points_y);
-      END_MENU();
-    }
-  #endif
 
   /**
    *
@@ -5665,15 +5645,6 @@ void lcd_reset_alert_level() { lcd_status_message_level = 0; }
     u8g.setContrast(lcd_contrast);
   }
 
-#endif
-
-#if ENABLED(AUTO_BED_LEVELING_LINEAR) || ENABLED(AUTO_BED_LEVELING_BILINEAR)
-  void set_abl_grid_max_points_x(const int16_t value) {
-    abl_grid_max_points_x = constrain(value, 3, 15);
-  }
-  void set_abl_grid_max_points_y(const int16_t value) {
-    abl_grid_max_points_y = constrain(value, 3, 15);
-  }
 #endif
 
 #if ENABLED(ULTIPANEL)

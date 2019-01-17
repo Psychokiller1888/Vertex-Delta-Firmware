@@ -222,8 +222,6 @@
 #include "utf_mapper.h"
 
 int16_t lcd_contrast; // Initialized by settings.load()
-int16_t abl_grid_max_points_x; // Initialized by settings.load()
-int16_t abl_grid_max_points_y; // Initialized by settings.load()
 static char currentfont = 0;
 
 // The current graphical page being rendered
