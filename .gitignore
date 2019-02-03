@@ -39,3 +39,8 @@
 .idea
 
 cmake-build-debug
+
+Marlin/Configuration_user_override.h
+Marlin/Configuration_user_override.sample.h
+Marlin/Configuration_adv_user_override.h
+Marlin/Configuration_adv_user_override.sample.h
